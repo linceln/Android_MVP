@@ -1,8 +1,7 @@
 package com.xyz.php;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -70,7 +69,8 @@ public class MainActivity extends AppCompatActivity {
                     .subscribe(new HttpSubscriber<BMIEntity>(this) {
                         @Override
                         protected void onSuccess(BMIEntity entity) {
-                            tvBMI.setText(entity.message);
+                            tvBMI.setText("BMI: " + entity.bmi);
+                            Toast.makeText(MainActivity.this, entity.message, Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
