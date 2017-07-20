@@ -1,6 +1,5 @@
 package com.xyz.core.http;
 
-
 import android.support.annotation.NonNull;
 
 import com.xyz.core.util.CodingUtil;
@@ -112,6 +111,7 @@ public class LogInterceptor implements Interceptor {
             isJson = true;
         } catch (Exception e) {
             isJson = false;
+            LogUtil.e(TAG, str);
             e.printStackTrace();
         }
         return isJson;
