@@ -12,4 +12,5 @@ public class BMIEntity extends BaseEntity {
     public String sex;
     public String height;
     public String weight;
+    public String bmi;
 }
