@@ -1,9 +1,9 @@
-package com.xyz.php.models;
+package com.xyz.php.models.api;
 
 import com.xyz.core.base.BaseEntity;
 import com.xyz.core.http.HttpManager;
 import com.xyz.php.models.api.PhpService;
-import com.xyz.php.models.entity.BMIEntity;
+import com.xyz.php.entity.BMIEntity;
 
 import io.reactivex.Flowable;
 

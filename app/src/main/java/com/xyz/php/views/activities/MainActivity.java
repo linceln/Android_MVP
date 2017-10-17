@@ -1,4 +1,4 @@
-package com.xyz.php.views;
+package com.xyz.php.views.activities;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -10,10 +10,10 @@ import android.widget.Toast;
 
 import com.xyz.core.base.BaseEntity;
 import com.xyz.php.R;
-import com.xyz.php.abs.IPhpPresenter;
-import com.xyz.php.abs.IPhpView;
-import com.xyz.php.models.entity.BMIEntity;
-import com.xyz.php.presenters.PhpPresenter;
+import com.xyz.php.abs.presenters.IPhpPresenter;
+import com.xyz.php.abs.views.IPhpView;
+import com.xyz.php.entity.BMIEntity;
+import com.xyz.php.presenters.PhpPresenterTest;
 
 public class MainActivity extends AppCompatActivity implements IPhpView, View.OnClickListener {
 
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements IPhpView, View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        presenter = new PhpPresenter(this);
+        presenter = new PhpPresenterTest(this);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.xyz.core.http;
 
+import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.xyz.core.BuildConfig;
 import com.xyz.core.constant.UrlConst;
 
@@ -46,6 +47,8 @@ public class HttpManager {
         if (BuildConfig.DEBUG) {
             builder.addInterceptor(new LogInterceptor());
         }
+
+        builder.addNetworkInterceptor(new StethoInterceptor());
 
         return builder.build();
     }

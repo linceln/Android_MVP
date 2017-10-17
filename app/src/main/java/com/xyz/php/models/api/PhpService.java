@@ -1,13 +1,12 @@
 package com.xyz.php.models.api;
 
 import com.xyz.core.base.BaseEntity;
-import com.xyz.php.models.entity.BMIEntity;
+import com.xyz.php.entity.BMIEntity;
 
 import io.reactivex.Flowable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 /**

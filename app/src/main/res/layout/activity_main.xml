@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context="com.xyz.php.views.MainActivity">
+    tools:context="com.xyz.php.views.activities.MainActivity">
 
     <EditText
         android:id="@+id/etName"

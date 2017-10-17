@@ -4,10 +4,10 @@ import android.text.TextUtils;
 
 import com.xyz.core.base.BaseEntity;
 import com.xyz.core.http.HttpSubscriber;
-import com.xyz.php.abs.IPhpPresenter;
-import com.xyz.php.abs.IPhpView;
-import com.xyz.php.models.PhpRequest;
-import com.xyz.php.models.entity.BMIEntity;
+import com.xyz.php.abs.presenters.IPhpPresenter;
+import com.xyz.php.abs.views.IPhpView;
+import com.xyz.php.models.api.PhpRequest;
+import com.xyz.php.entity.BMIEntity;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -53,7 +53,6 @@ public class PhpPresenter implements IPhpPresenter {
 
     @Override
     public void getDBData() {
-
     }
 
     /**
