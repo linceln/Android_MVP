@@ -1,56 +1,22 @@
 package com.xyz.core.http;
 
-import android.util.Log;
+import android.support.v4.app.FragmentActivity;
 
 import com.xyz.core.base.BaseEntity;
 
-import java.net.ConnectException;
-import java.net.SocketTimeoutException;
-
-import rx.Subscriber;
-
 /**
- * 2017/2/7.
+ * 2017/10/17.
  */
-public abstract class HttpSubscriber<T extends BaseEntity> extends Subscriber<T> {
+public abstract class HttpSubscriber<T extends BaseEntity> extends HttpAbstractSubscriber<T> {
 
-    private static final String TAG = "HTTP";
+    private FragmentActivity activity;
 
-    public HttpSubscriber() {
-    }
-
-    protected abstract void onSuccess(T entity);
-
-    protected abstract void onFail(String msg);
-
-    @Override
-    public void onError(Throwable e) {
-        Log.e(TAG, e.getMessage(), e);
-        if (e instanceof SocketTimeoutException || e instanceof ConnectException) {
-            onFail("网络不给力，请检查网络设置");
-        } else {
-            onFail(e.getMessage());
-        }
+    public HttpSubscriber(FragmentActivity activity) {
+        this.activity = activity;
     }
 
     @Override
-    public void onNext(T t) {
-        switch (t.code) {
-            case 0:
-                onFail(t.message);
-                break;
-            case 1:
-            case 2:
-            case 3:
-                onSuccess(t);
-                break;
-            default:
-                onFail(t.message);
-                break;
-        }
-    }
+    protected void on1001() {
 
-    @Override
-    public void onCompleted() {
     }
 }

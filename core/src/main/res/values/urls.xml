@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="base_url">http://117.48.203.197:9000</item>
+    <item name="image_url">http://117.48.203.197:9000</item>
+    <item name="html_url">http://117.48.203.197:9000</item>
+</resources>

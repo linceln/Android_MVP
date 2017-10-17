@@ -1,12 +1,16 @@
 package com.xyz.php.views;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.xyz.core.base.BaseEntity;
 import com.xyz.php.R;
+import com.xyz.php.abs.IPhpPresenter;
 import com.xyz.php.abs.IPhpView;
 import com.xyz.php.models.entity.BMIEntity;
 import com.xyz.php.presenters.PhpPresenter;
@@ -20,13 +24,12 @@ public class MainActivity extends AppCompatActivity implements IPhpView, View.On
     private EditText etWeight;
     private TextView tvBMI;
 
-    private PhpPresenter presenter;
+    private IPhpPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         presenter = new PhpPresenter(this);
     }
 
@@ -39,6 +42,31 @@ public class MainActivity extends AppCompatActivity implements IPhpView, View.On
         etWeight = (EditText) findViewById(R.id.etWeight);
         tvBMI = (TextView) findViewById(R.id.tvBMI);
         findViewById(R.id.btn).setOnClickListener(this);
+    }
+
+    @Override
+    public void onRequestSuccess(BaseEntity entity) {
+        Toast.makeText(this, entity.code, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSubmitSuccess(BMIEntity entity) {
+        tvBMI.setText(entity.bmi);
+    }
+
+    @Override
+    public void toastNegative(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public FragmentActivity getActivity() {
+        return this;
+    }
+
+    @Override
+    public void onClick(View v) {
+        presenter.submitBmi();
     }
 
     @Override
@@ -58,21 +86,5 @@ public class MainActivity extends AppCompatActivity implements IPhpView, View.On
         bmiEntity.weight = weight;
 
         return bmiEntity;
-    }
-
-    @Override
-    public void onRequestSuccess(BMIEntity entity) {
-        tvBMI.setText(entity.bmi);
-    }
-
-    @Override
-    public void onRequestFail(String msg) {
-
-    }
-
-    @Override
-    public void onClick(View v) {
-        BMIEntity userInput = getUserInput();
-        presenter.submitBmi(userInput);
     }
 }
