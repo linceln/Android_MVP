@@ -1,23 +1,17 @@
 package com.xyz.core.http;
 
-import com.xyz.core.entity.BaseEntity;
-
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-
 public class DoTransform {
 
-    public static <T extends BaseEntity> Observable.Transformer<T, T> applyScheduler() {
-        return new Observable.Transformer<T, T>() {
-            @Override
-            public Observable<T> call(Observable<T> tObservable) {
-                return tObservable
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread());
-            }
-        };
-    }
+//    public static <T extends BaseEntity> Observable.Transformer<T, T> applyScheduler() {
+//        return new Observable.Transformer<T, T>() {
+//            @Override
+//            public Observable<T> call(Observable<T> tObservable) {
+//                return tObservable
+//                        .subscribeOn(Schedulers.io())
+//                        .observeOn(AndroidSchedulers.mainThread());
+//            }
+//        };
+//    }
 
 //    public static <T extends BaseEntity> Observable.Transformer<T, T> applyLoading(final FragmentActivity activity) {
 //

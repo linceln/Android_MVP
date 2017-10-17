@@ -15,7 +15,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okio.Buffer;
 
-public class ParamInterceptor implements Interceptor {
+class ParamInterceptor implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {

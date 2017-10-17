@@ -1,21 +1,21 @@
-package com.xyz.php.business.request;
+package com.xyz.php.models.api;
 
-import com.xyz.php.business.entity.BMIEntity;
+import com.xyz.php.models.entity.BMIEntity;
 
+import io.reactivex.Flowable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
-import rx.Observable;
 
 /**
  * 2017/7/19.
  */
 
-interface PhpService {
+public interface PhpService {
 
     @FormUrlEncoded
     @POST("bmi-api/calculate")
-    Observable<BMIEntity> calculateBMI(
+    Flowable<BMIEntity> calculateBMI(
             @Field("name") String name,
             @Field("sex") String sex,
             @Field("age") String age,

@@ -1,9 +1,8 @@
 package com.xyz.core.http;
 
-import android.content.Context;
 import android.util.Log;
 
-import com.xyz.core.entity.BaseEntity;
+import com.xyz.core.base.BaseEntity;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
@@ -17,10 +16,7 @@ public abstract class HttpSubscriber<T extends BaseEntity> extends Subscriber<T>
 
     private static final String TAG = "HTTP";
 
-    private Context context;
-
-    public HttpSubscriber(Context context) {
-        this.context = context;
+    public HttpSubscriber() {
     }
 
     protected abstract void onSuccess(T entity);
