@@ -35,13 +35,14 @@ public class MainActivity extends AppCompatActivity implements IPhpView, View.On
 
     @Override
     public void initUI() {
-        etName = (EditText) findViewById(R.id.etName);
-        etSex = (EditText) findViewById(R.id.etSex);
-        etAge = (EditText) findViewById(R.id.etAge);
-        etHeight = (EditText) findViewById(R.id.etHeight);
-        etWeight = (EditText) findViewById(R.id.etWeight);
-        tvBMI = (TextView) findViewById(R.id.tvBMI);
+        etName = findViewById(R.id.etName);
+        etSex = findViewById(R.id.etSex);
+        etAge = findViewById(R.id.etAge);
+        etHeight = findViewById(R.id.etHeight);
+        etWeight = findViewById(R.id.etWeight);
+        tvBMI = findViewById(R.id.tvBMI);
         findViewById(R.id.btn).setOnClickListener(this);
+        findViewById(R.id.btnGet).setOnClickListener(this);
     }
 
     @Override
@@ -51,7 +52,8 @@ public class MainActivity extends AppCompatActivity implements IPhpView, View.On
 
     @Override
     public void onSubmitSuccess(BMIEntity entity) {
-        tvBMI.setText(entity.bmi);
+//        tvBMI.setText(entity.bmi);
+        Toast.makeText(this, entity.msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -66,7 +68,15 @@ public class MainActivity extends AppCompatActivity implements IPhpView, View.On
 
     @Override
     public void onClick(View v) {
-        presenter.submitBmi();
+        switch (v.getId()) {
+            case R.id.btn:
+                presenter.submitBmi();
+                break;
+
+            case R.id.btnGet:
+                tvBMI.setText(presenter.getDBMobile());
+                break;
+        }
     }
 
     @Override

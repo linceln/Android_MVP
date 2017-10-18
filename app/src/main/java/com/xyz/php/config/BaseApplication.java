@@ -1,4 +1,4 @@
-package com.xyz.php;
+package com.xyz.php.config;
 
 import com.xyz.core.base.AbstractApplication;
 

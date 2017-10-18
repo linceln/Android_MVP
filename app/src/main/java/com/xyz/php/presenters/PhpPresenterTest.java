@@ -19,7 +19,7 @@ public class PhpPresenterTest implements IPhpPresenter {
     public PhpPresenterTest(IPhpView phpView) {
         this.phpView = phpView;
         this.phpView.initUI();
-        getDBData();
+        getDBMobile();
     }
 
     @Override
@@ -28,7 +28,10 @@ public class PhpPresenterTest implements IPhpPresenter {
     }
 
     @Override
-    public void getDBData() {
+    public String getDBMobile() {
+        Realm realm = Realm.getDefaultInstance();
+        User user = realm.where(User.class).equalTo("mobile", "15859286737").findFirst();
+        return user != null ? user.mobile : "";
     }
 
     @Override
@@ -48,7 +51,7 @@ public class PhpPresenterTest implements IPhpPresenter {
             @Override
             public void onSuccess() {
                 BMIEntity entity = new BMIEntity();
-                entity.message = "插入数据库成功";
+                entity.msg = "插入数据库成功";
                 phpView.onSubmitSuccess(entity);
             }
         });

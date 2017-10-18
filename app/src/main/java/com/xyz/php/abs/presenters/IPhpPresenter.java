@@ -8,7 +8,7 @@ public interface IPhpPresenter {
 
     void getRemoteData();
 
-    void getDBData();
+    String getDBMobile();
 
     void submitBmi();
 }

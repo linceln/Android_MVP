@@ -64,4 +64,10 @@
         android:layout_height="wrap_content"
         android:text="提交" />
 
+    <Button
+        android:id="@+id/btnGet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="GET" />
+
 </LinearLayout>

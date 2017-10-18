@@ -28,18 +28,16 @@ abstract class HttpAbstractSubscriber<T extends BaseEntity> implements Subscribe
         if (t.statusCode >= 200 && t.statusCode < 300) {
             switch (t.code) {
                 case 0:
-                    onFail(t.message);
+                    onFail(t.msg);
                     break;
                 case 1:
-                case 2:
-                case 3:
                     onSuccess(t);
                     break;
                 case 1001:
                     on1001();
                     break;
                 default:
-                    onFail(t.message);
+                    onFail(t.msg);
                     break;
             }
         } else {

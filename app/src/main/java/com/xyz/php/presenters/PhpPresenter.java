@@ -6,7 +6,7 @@ import com.xyz.core.base.BaseEntity;
 import com.xyz.core.http.HttpSubscriber;
 import com.xyz.php.abs.presenters.IPhpPresenter;
 import com.xyz.php.abs.views.IPhpView;
-import com.xyz.php.models.api.PhpRequest;
+import com.xyz.php.models.PhpRequest;
 import com.xyz.php.entity.BMIEntity;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -52,7 +52,8 @@ public class PhpPresenter implements IPhpPresenter {
     }
 
     @Override
-    public void getDBData() {
+    public String getDBMobile() {
+        return null;
     }
 
     /**
