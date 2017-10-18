@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'realm-android'
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.xyz.php"
         minSdkVersion 15
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -28,3 +28,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     androidTestCompile 'com.google.code.findbugs:jsr305:3.0.2'
 }
+
+//realm {
+//    syncEnabled = true
+//}
