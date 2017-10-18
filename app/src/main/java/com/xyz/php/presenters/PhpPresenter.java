@@ -7,7 +7,7 @@ import com.xyz.core.http.HttpSubscriber;
 import com.xyz.php.abs.presenters.IPhpPresenter;
 import com.xyz.php.abs.views.IPhpView;
 import com.xyz.php.models.PhpRequest;
-import com.xyz.php.entity.BMIEntity;
+import com.xyz.php.entities.BMIEntity;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;

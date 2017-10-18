@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.xyz.php.views.activities.LoginActivity">
-
-    <include layout="@layout/navigator" />
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.xyz.php.views.activities.RegisterActivity"
+    tools:showIn="@layout/activity_register">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,11 +22,27 @@
             android:layout_height="wrap_content">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/etAccount"
+                android:id="@+id/etUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Account"
+                android:hint="Username"
                 android:inputType="none"
+                android:maxLength="11"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="16sp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/etMobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mobile"
+                android:inputType="number"
                 android:maxLength="11"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
@@ -48,20 +65,22 @@
                 android:textSize="16sp" />
         </android.support.design.widget.TextInputLayout>
 
-        <Button
-            android:id="@+id/btnSignIn"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilRepeatPassword"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="SIGN IN" />
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/etRepeatPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Repeat password"
+                android:inputType="textPassword"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="16sp" />
+        </android.support.design.widget.TextInputLayout>
+
     </LinearLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:fabSize="normal"
-        app:srcCompat="@android:drawable/ic_dialog_email"/>
-
-</android.support.design.widget.CoordinatorLayout>
+</android.support.constraint.ConstraintLayout>

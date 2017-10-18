@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PHP</string>
+    <string name="title_activity_register">RegisterActivity</string>
 </resources>

@@ -4,7 +4,7 @@ import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.xyz.core.BuildConfig;
 import com.xyz.core.http.LogInterceptor;
 import com.xyz.core.http.ParamInterceptor;
-import com.xyz.php.constant.UrlConst;
+import com.xyz.php.constants.UrlConst;
 
 import java.util.concurrent.TimeUnit;
 

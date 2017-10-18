@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.xyz.php.abs.presenters.IPhpPresenter;
 import com.xyz.php.abs.views.IPhpView;
-import com.xyz.php.entity.BMIEntity;
+import com.xyz.php.entities.BMIEntity;
 import com.xyz.php.models.local.User;
 
 import io.realm.Realm;

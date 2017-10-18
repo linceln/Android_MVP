@@ -1,4 +1,4 @@
-package com.xyz.php.entity;
+package com.xyz.php.entities;
 
 import com.xyz.core.base.BaseEntity;
 

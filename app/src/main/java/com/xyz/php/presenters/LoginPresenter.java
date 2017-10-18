@@ -6,7 +6,7 @@ import android.text.TextUtils;
 import com.xyz.core.http.HttpSubscriber;
 import com.xyz.php.abs.presenters.ILoginPresenter;
 import com.xyz.php.abs.views.ILoginView;
-import com.xyz.php.entity.UserEntity;
+import com.xyz.php.entities.UserEntity;
 import com.xyz.php.models.UserRequest;
 import com.xyz.php.models.local.User;
 
