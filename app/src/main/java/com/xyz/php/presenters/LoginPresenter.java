@@ -31,10 +31,10 @@ public class LoginPresenter implements ILoginPresenter {
 
     @Override
     public void signIn() {
-        final String account = loginView.getAccount();
+        final String mobile = loginView.getMobile();
         String password = loginView.getPassword();
-        if (checkNotNull(account, password)) {
-            UserRequest.login(account, password)
+        if (checkNotNull(mobile, password)) {
+            UserRequest.login(mobile, password)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new HttpSubscriber<UserEntity>(loginView.getActivity()) {
@@ -77,8 +77,8 @@ public class LoginPresenter implements ILoginPresenter {
         });
     }
 
-    private boolean checkNotNull(String account, String password) {
-        if (TextUtils.isEmpty(account)) {
+    private boolean checkNotNull(String mobile, String password) {
+        if (TextUtils.isEmpty(mobile)) {
             loginView.validate("Account cannot be empty");
             return false;
         }

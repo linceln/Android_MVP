@@ -21,7 +21,7 @@ import com.xyz.php.utils.SnackbarUtils;
 
 public class LoginActivity extends BaseActivity implements ILoginView, View.OnClickListener {
 
-    private TextInputEditText etAccount;
+    private TextInputEditText etMobile;
     private TextInputEditText etPassword;
     private ILoginPresenter presenter;
     private FloatingActionButton fab;
@@ -31,7 +31,7 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initToolbar("SIGN IN");
-        etAccount = findViewById(R.id.etAccount);
+        etMobile = findViewById(R.id.etMobile);
         TextInputLayout tilPassword = findViewById(R.id.tilPassword);
         tilPassword.setPasswordVisibilityToggleEnabled(true);
         etPassword = findViewById(R.id.etPassword);
@@ -47,7 +47,7 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
         if (requestCode == RequestCode.REGISTER && resultCode == Activity.RESULT_OK) {
             if (data != null) {
                 String mobile = data.getStringExtra(Extras.MOBILE);
-                etAccount.setText(TextUtils.isEmpty(mobile) ? "" : mobile);
+                etMobile.setText(TextUtils.isEmpty(mobile) ? "" : mobile);
                 etPassword.requestFocus();
             }
         }
@@ -66,8 +66,8 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
     }
 
     @Override
-    public String getAccount() {
-        return etAccount.getText().toString().trim();
+    public String getMobile() {
+        return etMobile.getText().toString().trim();
     }
 
     @Override
