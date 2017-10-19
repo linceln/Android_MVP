@@ -48,9 +48,9 @@ public class HttpManager {
 
         if (BuildConfig.DEBUG) {
             builder.addInterceptor(new LogInterceptor());
+            builder.addNetworkInterceptor(new StethoInterceptor());
         }
 
-        builder.addNetworkInterceptor(new StethoInterceptor());
 
         return builder.build();
     }

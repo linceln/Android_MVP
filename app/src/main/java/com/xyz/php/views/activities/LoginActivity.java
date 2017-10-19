@@ -24,6 +24,7 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
     private TextInputEditText etAccount;
     private TextInputEditText etPassword;
     private ILoginPresenter presenter;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +36,7 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
         tilPassword.setPasswordVisibilityToggleEnabled(true);
         etPassword = findViewById(R.id.etPassword);
         findViewById(R.id.btnSignIn).setOnClickListener(this);
-        FloatingActionButton fab = findViewById(R.id.fab);
+        fab = findViewById(R.id.fab);
         fab.setOnClickListener(this);
         presenter = new LoginPresenter(this);
     }
@@ -76,7 +77,7 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
 
     @Override
     public void validate(String msg) {
-        SnackbarUtils.simple(etAccount, msg);
+        SnackbarUtils.simple(fab, msg);
     }
 
     @Override
@@ -86,11 +87,11 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
 
     @Override
     public void onLoginSuccess(String msg) {
-        SnackbarUtils.simple(etAccount, msg);
+        SnackbarUtils.simple(fab, msg);
     }
 
     @Override
     public void onLoginFailed(String msg) {
-        SnackbarUtils.simple(etAccount, msg);
+        SnackbarUtils.simple(fab, msg);
     }
 }
