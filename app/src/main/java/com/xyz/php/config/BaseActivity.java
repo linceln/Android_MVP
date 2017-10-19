@@ -16,6 +16,10 @@ public abstract class BaseActivity extends AbstractActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        receive();
+    }
+
+    protected void receive() {
     }
 
     protected void initToolbar(String title) {

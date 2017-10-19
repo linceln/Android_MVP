@@ -6,4 +6,6 @@ package com.xyz.php.abs.presenters;
 public interface ILoginPresenter {
 
     void signIn();
+
+    void startRegisterActivity();
 }

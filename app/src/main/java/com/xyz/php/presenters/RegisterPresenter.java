@@ -35,9 +35,10 @@ public class RegisterPresenter implements IRegisterPresenter {
                     .observeOn(AndroidSchedulers.mainThread())
                     .compose(registerView.getActivity().<UserEntity>bindToLifecycle())
                     .subscribe(new HttpSubscriber<UserEntity>(registerView.getActivity()) {
+
                         @Override
                         protected void onSuccess(UserEntity userEntity) {
-                            registerView.onRegisterSuccess(userEntity.msg);
+                            registerView.onRegisterSuccess(userEntity);
                         }
 
                         @Override

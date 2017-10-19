@@ -1,25 +1,28 @@
 package com.xyz.php.views.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.FragmentActivity;
+import android.text.TextUtils;
 import android.view.View;
-import android.widget.Toast;
 
 import com.xyz.php.R;
 import com.xyz.php.abs.presenters.ILoginPresenter;
 import com.xyz.php.abs.views.ILoginView;
 import com.xyz.php.config.BaseActivity;
+import com.xyz.php.constants.Extras;
+import com.xyz.php.constants.RequestCode;
 import com.xyz.php.presenters.LoginPresenter;
+import com.xyz.php.utils.SnackbarUtils;
 
 public class LoginActivity extends BaseActivity implements ILoginView, View.OnClickListener {
 
     private TextInputEditText etAccount;
     private TextInputEditText etPassword;
-    private FloatingActionButton fab;
     private ILoginPresenter presenter;
 
     @Override
@@ -32,9 +35,21 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
         tilPassword.setPasswordVisibilityToggleEnabled(true);
         etPassword = findViewById(R.id.etPassword);
         findViewById(R.id.btnSignIn).setOnClickListener(this);
-        fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(this);
         presenter = new LoginPresenter(this);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RequestCode.REGISTER && resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                String mobile = data.getStringExtra(Extras.MOBILE);
+                etAccount.setText(TextUtils.isEmpty(mobile) ? "" : mobile);
+                etPassword.requestFocus();
+            }
+        }
     }
 
     @Override
@@ -44,7 +59,7 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
                 presenter.signIn();
                 break;
             case R.id.fab:
-                startActivity(new Intent(this, RegisterActivity.class));
+                presenter.startRegisterActivity();
                 break;
         }
     }
@@ -61,7 +76,7 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
 
     @Override
     public void validate(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        SnackbarUtils.simple(etAccount, msg);
     }
 
     @Override
@@ -71,11 +86,11 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
 
     @Override
     public void onLoginSuccess(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        SnackbarUtils.simple(etAccount, msg);
     }
 
     @Override
     public void onLoginFailed(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        SnackbarUtils.simple(etAccount, msg);
     }
 }
