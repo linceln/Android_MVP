@@ -16,6 +16,8 @@ public interface ILoginView {
 
     FragmentActivity getActivity();
 
+    void onLastUserMobile(String mobile);
+
     void onLoginSuccess(String msg);
 
     void onLoginFailed(String msg);

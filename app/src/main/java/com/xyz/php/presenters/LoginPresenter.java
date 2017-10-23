@@ -19,6 +19,7 @@ import com.xyz.php.views.activities.RegisterActivity;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import io.realm.Realm;
+import io.realm.Sort;
 
 /**
  * 2017/10/18.
@@ -29,6 +30,13 @@ public class LoginPresenter implements ILoginPresenter {
 
     public LoginPresenter(ILoginView loginView) {
         this.loginView = loginView;
+        getLastUserMobile();
+    }
+
+    private void getLastUserMobile() {
+        Realm realm = Realm.getDefaultInstance();
+        User user = realm.where(User.class).findAllSorted("updated_at", Sort.DESCENDING).first();
+        loginView.onLastUserMobile(user == null ? "" : user.mobile);
     }
 
     @Override
@@ -75,6 +83,7 @@ public class LoginPresenter implements ILoginPresenter {
                 finalUser.mobile = userEntity.mobile != null ? userEntity.mobile : "";
                 finalUser.token = userEntity.token;
                 finalUser.nickname = userEntity.username;
+                finalUser.updated_at = System.currentTimeMillis();
                 realm.copyToRealmOrUpdate(finalUser);
             }
         });

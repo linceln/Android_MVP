@@ -30,7 +30,3 @@ dependencies {
     androidTestCompile 'com.google.code.findbugs:jsr305:3.0.2'
     implementation 'com.android.support:design:26.1.0'
 }
-
-//realm {
-//    syncEnabled = true
-//}

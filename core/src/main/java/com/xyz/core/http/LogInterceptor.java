@@ -24,12 +24,29 @@ public class LogInterceptor implements Interceptor {
 
     private static final String TAG = "HTTP";
 
+    /**
+     * 判断该String类型是否是Json数据
+     */
+    private static boolean isJson(String str) {
+        boolean isJson;
+        try {
+            new JSONObject(str);
+            isJson = true;
+        } catch (Exception e) {
+            isJson = false;
+            LogUtil.e(TAG, str);
+            e.printStackTrace();
+        }
+        return isJson;
+    }
+
     @Override
     public okhttp3.Response intercept(Chain chain) throws IOException {
 
         Request request = chain.request();
         LogUtil.e(TAG, "---------------------------------Start-------------------------------------");
-        LogUtil.e(TAG, request.method() + " " + request.header("Authenticator"));
+        LogUtil.e(TAG, request.method());
+        LogUtil.e(TAG, request.headers().toString());
         if ("GET".equals(request.method())) {
             String str = "";
             String url = request.url().toString();
@@ -56,6 +73,7 @@ public class LogInterceptor implements Interceptor {
         }
 
         okhttp3.Response response = chain.proceed(request);
+        LogUtil.e(TAG, response.headers().toString());
         String content = response.body().string();
 
         if (content != null && isJson(content)) {
@@ -99,21 +117,5 @@ public class LogInterceptor implements Interceptor {
             str += s + "\n";
         }
         return str;
-    }
-
-    /**
-     * 判断该String类型是否是Json数据
-     */
-    private static boolean isJson(String str) {
-        boolean isJson;
-        try {
-            new JSONObject(str);
-            isJson = true;
-        } catch (Exception e) {
-            isJson = false;
-            LogUtil.e(TAG, str);
-            e.printStackTrace();
-        }
-        return isJson;
     }
 }

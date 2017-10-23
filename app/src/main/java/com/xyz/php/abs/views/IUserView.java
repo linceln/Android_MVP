@@ -9,4 +9,10 @@ import android.support.v4.app.FragmentActivity;
 public interface IUserView {
 
     FragmentActivity getActivity();
+
+    void notifyDataSetChanged();
+
+    void onRequestSuccess();
+
+    void onRequestFailed(String msg);
 }

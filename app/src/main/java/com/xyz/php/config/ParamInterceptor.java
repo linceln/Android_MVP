@@ -30,10 +30,10 @@ public class ParamInterceptor implements Interceptor {
         Request newRequest;
         switch (request.method()) {
             case "GET":
-                newRequest = request.newBuilder().url(newUrl(request)).addHeader("Authenticator", getToken()).build();
+                newRequest = request.newBuilder().url(newUrl(request)).addHeader("Authorization", getToken()).build();
                 break;
             case "POST":
-                newRequest = request.newBuilder().url(newUrl(request)).post(newRequestBody(request)).addHeader("Authenticator", getToken()).build();
+                newRequest = request.newBuilder().url(newUrl(request)).post(newRequestBody(request)).addHeader("Authorization", getToken()).build();
                 break;
             default:
                 newRequest = request.newBuilder().build();

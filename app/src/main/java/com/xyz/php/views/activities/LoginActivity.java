@@ -17,6 +17,7 @@ import com.xyz.php.constants.Extras;
 import com.xyz.php.constants.RequestCode;
 import com.xyz.php.presenters.LoginPresenter;
 import com.xyz.php.utils.SnackbarUtils;
+import com.xyz.php.utils.ToastUtils;
 
 public class LoginActivity extends BaseActivity implements ILoginView, View.OnClickListener {
 
@@ -85,8 +86,15 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
     }
 
     @Override
+    public void onLastUserMobile(String mobile) {
+        etMobile.setText(mobile);
+    }
+
+    @Override
     public void onLoginSuccess(String msg) {
-        SnackbarUtils.simple(container, msg);
+        ToastUtils.simple(msg);
+        startActivity(new Intent(this, UserActivity.class));
+        finish();
     }
 
     @Override

@@ -21,4 +21,5 @@ public class User extends RealmObject {
 
     @Required
     public String token;
+    public long updated_at;
 }
