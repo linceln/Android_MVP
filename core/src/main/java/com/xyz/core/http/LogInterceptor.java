@@ -29,7 +29,7 @@ public class LogInterceptor implements Interceptor {
 
         Request request = chain.request();
         LogUtil.e(TAG, "---------------------------------Start-------------------------------------");
-        LogUtil.e(TAG, request.method());
+        LogUtil.e(TAG, request.method() + " " + request.header("Authenticator"));
         if ("GET".equals(request.method())) {
             String str = "";
             String url = request.url().toString();

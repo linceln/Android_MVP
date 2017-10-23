@@ -1,7 +1,10 @@
-package com.xyz.core.http;
+package com.xyz.php.config;
 
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
+
+import com.xyz.php.constants.SPConst;
+import com.xyz.php.utils.SPUtils;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -27,10 +30,10 @@ public class ParamInterceptor implements Interceptor {
         Request newRequest;
         switch (request.method()) {
             case "GET":
-                newRequest = request.newBuilder().url(newUrl(request)).build();
+                newRequest = request.newBuilder().url(newUrl(request)).addHeader("Authenticator", getToken()).build();
                 break;
             case "POST":
-                newRequest = request.newBuilder().url(newUrl(request)).post(newRequestBody(request)).build();
+                newRequest = request.newBuilder().url(newUrl(request)).post(newRequestBody(request)).addHeader("Authenticator", getToken()).build();
                 break;
             default:
                 newRequest = request.newBuilder().build();
@@ -39,6 +42,9 @@ public class ParamInterceptor implements Interceptor {
         return newRequest;
     }
 
+    private String getToken() {
+        return "Bearer " + SPUtils.getString(SPConst.TOKEN);
+    }
 
     /**
      * GET URL

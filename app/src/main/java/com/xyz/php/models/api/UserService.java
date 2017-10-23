@@ -1,10 +1,12 @@
 package com.xyz.php.models.api;
 
 import com.xyz.php.entities.UserEntity;
+import com.xyz.php.entities.UserListEntity;
 
 import io.reactivex.Flowable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 /**
@@ -16,7 +18,7 @@ public interface UserService {
     @FormUrlEncoded
     @POST("v1/users/login")
     Flowable<UserEntity> login(
-            @Field("username") String username,
+            @Field("mobile") String username,
             @Field("password") String password,
             @Field("device") int device
     );
@@ -29,4 +31,7 @@ public interface UserService {
             @Field("password") String password,
             @Field("passwordRepeat") String passwordRepeat
     );
+
+    @GET("v1/users")
+    Flowable<UserListEntity> index();
 }

@@ -9,9 +9,11 @@ import com.xyz.core.http.HttpSubscriber;
 import com.xyz.php.abs.presenters.ILoginPresenter;
 import com.xyz.php.abs.views.ILoginView;
 import com.xyz.php.constants.RequestCode;
+import com.xyz.php.constants.SPConst;
 import com.xyz.php.entities.UserEntity;
 import com.xyz.php.models.UserRequest;
 import com.xyz.php.models.local.User;
+import com.xyz.php.utils.SPUtils;
 import com.xyz.php.views.activities.RegisterActivity;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -59,6 +61,7 @@ public class LoginPresenter implements ILoginPresenter {
     }
 
     private void save(final UserEntity userEntity) {
+        SPUtils.putString(SPConst.TOKEN, userEntity.token);
         Realm realm = Realm.getDefaultInstance();
         User user = realm.where(User.class).equalTo("mobile", userEntity.username).findFirst();
         if (user == null) {
@@ -79,7 +82,7 @@ public class LoginPresenter implements ILoginPresenter {
 
     private boolean checkNotNull(String mobile, String password) {
         if (TextUtils.isEmpty(mobile)) {
-            loginView.validate("Account cannot be empty");
+            loginView.validate("Mobile cannot be empty");
             return false;
         }
         if (TextUtils.isEmpty(password)) {

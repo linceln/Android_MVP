@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.xyz.php.views.activities.RegisterActivity">
 
-    <include layout="@layout/navigator"/>
+    <include layout="@layout/navigator" />
 
-    <include layout="@layout/content_register"/>
+    <include layout="@layout/content_register" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -18,6 +18,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:fabSize="normal"
-        app:srcCompat="@mipmap/ic_register"/>
+        app:srcCompat="@mipmap/ic_register" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -3,6 +3,7 @@ package com.xyz.php.models;
 import com.xyz.php.config.HttpManager;
 import com.xyz.php.constants.AppConst;
 import com.xyz.php.entities.UserEntity;
+import com.xyz.php.entities.UserListEntity;
 import com.xyz.php.models.api.UserService;
 
 import io.reactivex.Flowable;
@@ -20,5 +21,9 @@ public class UserRequest {
 
     public static Flowable<UserEntity> register(String username, String mobile, String password, String passwordRepeat) {
         return service.register(username, mobile, password, passwordRepeat);
+    }
+
+    public static Flowable<UserListEntity> index() {
+        return service.index();
     }
 }

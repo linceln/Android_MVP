@@ -3,7 +3,6 @@ package com.xyz.php.views.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.FragmentActivity;
@@ -21,23 +20,23 @@ import com.xyz.php.utils.SnackbarUtils;
 
 public class LoginActivity extends BaseActivity implements ILoginView, View.OnClickListener {
 
+    private View container;
     private TextInputEditText etMobile;
     private TextInputEditText etPassword;
     private ILoginPresenter presenter;
-    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initToolbar("SIGN IN");
+        container = findViewById(R.id.linear);
         etMobile = findViewById(R.id.etMobile);
         TextInputLayout tilPassword = findViewById(R.id.tilPassword);
         tilPassword.setPasswordVisibilityToggleEnabled(true);
         etPassword = findViewById(R.id.etPassword);
         findViewById(R.id.btnSignIn).setOnClickListener(this);
-        fab = findViewById(R.id.fab);
-        fab.setOnClickListener(this);
+        findViewById(R.id.tvRegister).setOnClickListener(this);
         presenter = new LoginPresenter(this);
     }
 
@@ -59,7 +58,7 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
             case R.id.btnSignIn:
                 presenter.signIn();
                 break;
-            case R.id.fab:
+            case R.id.tvRegister:
                 presenter.startRegisterActivity();
                 break;
         }
@@ -77,7 +76,7 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
 
     @Override
     public void validate(String msg) {
-        SnackbarUtils.simple(fab, msg);
+        SnackbarUtils.simple(container, msg);
     }
 
     @Override
@@ -87,11 +86,11 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
 
     @Override
     public void onLoginSuccess(String msg) {
-        SnackbarUtils.simple(fab, msg);
+        SnackbarUtils.simple(container, msg);
     }
 
     @Override
     public void onLoginFailed(String msg) {
-        SnackbarUtils.simple(fab, msg);
+        SnackbarUtils.simple(container, msg);
     }
 }
