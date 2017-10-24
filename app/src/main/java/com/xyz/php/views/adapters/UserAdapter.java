@@ -35,7 +35,7 @@ public class UserAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         TextView tvUsername = holder.itemView.findViewById(R.id.tvUsername);
-        tvUsername.setText(users.get(position).username);
+        tvUsername.setText(users.get(position).username + "\n" + users.get(position).mobile);
     }
 
     @Override

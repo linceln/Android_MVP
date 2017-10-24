@@ -34,9 +34,9 @@ public class LoginPresenter implements ILoginPresenter {
     }
 
     private void getLastUserMobile() {
-        Realm realm = Realm.getDefaultInstance();
-        User user = realm.where(User.class).findAllSorted("updated_at", Sort.DESCENDING).first();
-        loginView.onLastUserMobile(user == null ? "" : user.mobile);
+//        Realm realm = Realm.getDefaultInstance();
+//        User user = realm.where(User.class).findAllSorted("updated_at", Sort.DESCENDING).first();
+//        loginView.onLastUserMobile(user == null ? "" : user.mobile);
     }
 
     @Override

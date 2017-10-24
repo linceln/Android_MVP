@@ -16,8 +16,6 @@ import com.xyz.php.views.adapters.UserAdapter;
 
 public class UserActivity extends BaseActivity implements IUserView {
 
-    private IUserPresenter presenter;
-    private RecyclerView recyclerView;
     private UserAdapter adapter;
     private CoordinatorLayout coordinator;
 
@@ -25,10 +23,10 @@ public class UserActivity extends BaseActivity implements IUserView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
+        IUserPresenter presenter = new UserPresenter(this);
         initToolbar("USERS");
-        presenter = new UserPresenter(this);
         coordinator = findViewById(R.id.coordinator);
-        recyclerView = findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new UserAdapter(this, presenter.getUsers());
         recyclerView.setAdapter(adapter);

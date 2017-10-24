@@ -4,15 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
     android:layout_marginBottom="100dp"
     android:divider="@drawable/divider_space"
-    android:showDividers="middle"
+    android:gravity="center"
+    android:orientation="vertical"
     android:padding="16dp"
+    android:showDividers="middle"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.xyz.php.views.activities.RegisterActivity"
     tools:showIn="@layout/activity_register">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_avatars_default" />
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
