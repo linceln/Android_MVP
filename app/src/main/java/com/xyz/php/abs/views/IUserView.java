@@ -15,4 +15,6 @@ public interface IUserView {
     void onRequestSuccess();
 
     void onRequestFailed(String msg);
+
+    void onItemClick();
 }
