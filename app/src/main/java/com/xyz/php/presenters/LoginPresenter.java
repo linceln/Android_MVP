@@ -19,7 +19,6 @@ import com.xyz.php.views.activities.RegisterActivity;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import io.realm.Realm;
-import io.realm.Sort;
 
 /**
  * 2017/10/18.
