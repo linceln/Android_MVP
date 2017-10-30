@@ -8,11 +8,13 @@ import android.text.TextUtils;
 import com.xyz.core.http.HttpSubscriber;
 import com.xyz.php.abs.presenters.ILoginPresenter;
 import com.xyz.php.abs.views.ILoginView;
+import com.xyz.php.constants.AppConst;
 import com.xyz.php.constants.RequestCode;
 import com.xyz.php.constants.SPConst;
 import com.xyz.php.entities.UserEntity;
 import com.xyz.php.models.UserRequest;
 import com.xyz.php.models.local.User;
+import com.xyz.php.utils.AES;
 import com.xyz.php.utils.SPUtils;
 import com.xyz.php.views.activities.RegisterActivity;
 
@@ -68,7 +70,7 @@ public class LoginPresenter implements ILoginPresenter {
     }
 
     private void save(final UserEntity userEntity) {
-        SPUtils.putString(SPConst.TOKEN, userEntity.token);
+        SPUtils.putString(SPConst.TOKEN, AES.encrypt(userEntity.token, AppConst.SALT));
         Realm realm = Realm.getDefaultInstance();
         User user = realm.where(User.class).equalTo("mobile", userEntity.username).findFirst();
         if (user == null) {

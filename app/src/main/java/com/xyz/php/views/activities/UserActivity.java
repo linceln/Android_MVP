@@ -22,7 +22,7 @@ public class UserActivity extends BaseActivity implements IUserView {
     private UserAdapter adapter;
     private IUserPresenter presenter;
 
-    private int page = AppConst.DEFAUL_PAGE;
+    private int page = AppConst.DEFAULT_PAGE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,7 @@ public class UserActivity extends BaseActivity implements IUserView {
 
     @Override
     public void onRefresh() {
-        page = AppConst.DEFAUL_PAGE;
+        page = AppConst.DEFAULT_PAGE;
         presenter.clear();
         presenter.getUser(page);
     }

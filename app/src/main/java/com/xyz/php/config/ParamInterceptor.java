@@ -3,7 +3,9 @@ package com.xyz.php.config;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
+import com.xyz.php.constants.AppConst;
 import com.xyz.php.constants.SPConst;
+import com.xyz.php.utils.AES;
 import com.xyz.php.utils.SPUtils;
 
 import java.io.IOException;
@@ -21,7 +23,7 @@ import okio.Buffer;
 public class ParamInterceptor implements Interceptor {
 
     @Override
-    public Response intercept(Chain chain) throws IOException {
+    public Response intercept(@NonNull Chain chain) throws IOException {
         return chain.proceed(generateSignRequest(chain.request()));
     }
 
@@ -43,7 +45,7 @@ public class ParamInterceptor implements Interceptor {
     }
 
     private String getToken() {
-        return "Bearer " + SPUtils.getString(SPConst.TOKEN);
+        return "Bearer " + AES.decrypt(SPUtils.getString(SPConst.TOKEN), AppConst.SALT);
     }
 
     /**
@@ -60,9 +62,12 @@ public class ParamInterceptor implements Interceptor {
         if (split.length > 1 && !TextUtils.isEmpty(split[1])) {
             HashMap<String, String> paramPairs = splitParamsFilterNull(split[1]);
 
-            String paramStr = "";
+            StringBuilder paramStr = new StringBuilder();
             for (Map.Entry<String, String> entry : paramPairs.entrySet()) {
-                paramStr += entry.getKey() + "=" + entry.getValue() + "&";
+                paramStr.append(entry.getKey())
+                        .append("=")
+                        .append(entry.getValue())
+                        .append("&");
             }
             String s = split[0] + "?" + paramStr;
             return s.substring(0, s.length() - 1);

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.xyz.php">
+    package="com.xyz.php">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".config.BaseApplication"
@@ -14,24 +14,15 @@
         android:theme="@style/AppTheme">
         <activity android:name=".views.activities.LoginActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".views.activities.MainActivity"/>
-        <activity
-            android:name=".views.activities.RegisterActivity"
-            android:label="@string/title_activity_register"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".views.activities.UserActivity"/>
-        <activity android:name=".views.activities.HomeActivity">
-        </activity>
-        <activity
-            android:name=".views.activities.UserDetailActivity"
-            android:label="@string/title_activity_user_detail"
-            android:theme="@style/AppTheme">
-        </activity>
+        <activity android:name=".views.activities.MainActivity" />
+        <activity android:name=".views.activities.RegisterActivity" />
+        <activity android:name=".views.activities.UserActivity" />
+        <activity android:name=".views.activities.HomeActivity" />
+        <activity android:name=".views.activities.UserDetailActivity" />
     </application>
-
 </manifest>

@@ -16,6 +16,7 @@ import com.xyz.php.config.BaseActivity;
 import com.xyz.php.constants.Extras;
 import com.xyz.php.constants.RequestCode;
 import com.xyz.php.presenters.LoginPresenter;
+import com.xyz.php.utils.MD5;
 import com.xyz.php.utils.SnackbarUtils;
 import com.xyz.php.utils.ToastUtils;
 
@@ -72,7 +73,7 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
 
     @Override
     public String getPassword() {
-        return etPassword.getText().toString().trim();
+        return MD5.digest(etPassword.getText().toString().trim());
     }
 
     @Override

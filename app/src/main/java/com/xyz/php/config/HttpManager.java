@@ -50,7 +50,6 @@ public class HttpManager {
             builder.addNetworkInterceptor(new StethoInterceptor());
         }
 
-
         return builder.build();
     }
 }
