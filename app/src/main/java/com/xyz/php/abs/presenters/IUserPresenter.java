@@ -10,5 +10,9 @@ import java.util.List;
 
 public interface IUserPresenter {
 
-    List<UserEntity> getUsers();
+    List<UserEntity> getUserList();
+
+    void clear();
+
+    void getUser(int page);
 }

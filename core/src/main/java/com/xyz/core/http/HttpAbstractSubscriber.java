@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.xyz.core.BuildConfig;
 import com.xyz.core.base.BaseEntity;
+import com.xyz.core.util.LogUtil;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;

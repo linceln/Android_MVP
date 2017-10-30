@@ -23,7 +23,7 @@ public class UserRequest {
         return service.register(username, mobile, password, passwordRepeat);
     }
 
-    public static Flowable<UserListEntity> index() {
-        return service.index();
+    public static Flowable<UserListEntity> index(int page) {
+        return service.index(page);
     }
 }

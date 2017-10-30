@@ -11,6 +11,7 @@ import com.xyz.php.R;
 import com.xyz.php.abs.presenters.IUserPresenter;
 import com.xyz.php.abs.views.IUserView;
 import com.xyz.php.config.BaseActivity;
+import com.xyz.php.constants.AppConst;
 import com.xyz.php.presenters.UserPresenter;
 import com.xyz.php.utils.SnackbarUtils;
 import com.xyz.php.views.adapters.UserAdapter;
@@ -19,17 +20,20 @@ public class UserActivity extends BaseActivity implements IUserView {
 
     private CoordinatorLayout coordinator;
     private UserAdapter adapter;
+    private IUserPresenter presenter;
+
+    private int page = AppConst.DEFAUL_PAGE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
+        presenter = new UserPresenter(this, page);
         initToolbar("USERS");
-        IUserPresenter presenter = new UserPresenter(this);
         coordinator = findViewById(R.id.coordinator);
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new UserAdapter(this, presenter.getUsers());
+        adapter = new UserAdapter(this, presenter.getUserList());
         recyclerView.setAdapter(adapter);
     }
 
@@ -39,12 +43,8 @@ public class UserActivity extends BaseActivity implements IUserView {
     }
 
     @Override
-    public void notifyDataSetChanged() {
-        adapter.notifyDataSetChanged();
-    }
-
-    @Override
     public void onRequestSuccess() {
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -55,5 +55,18 @@ public class UserActivity extends BaseActivity implements IUserView {
     @Override
     public void onItemClick() {
         startActivity(new Intent(this, HomeActivity.class));
+    }
+
+    @Override
+    public void onRefresh() {
+        page = AppConst.DEFAUL_PAGE;
+        presenter.clear();
+        presenter.getUser(page);
+    }
+
+    @Override
+    public void onPaging() {
+        page++;
+        presenter.getUser(page);
     }
 }

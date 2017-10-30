@@ -10,11 +10,13 @@ public interface IUserView {
 
     FragmentActivity getActivity();
 
-    void notifyDataSetChanged();
-
     void onRequestSuccess();
 
     void onRequestFailed(String msg);
 
     void onItemClick();
+
+    void onRefresh();
+
+    void onPaging();
 }

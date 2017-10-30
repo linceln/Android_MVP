@@ -8,6 +8,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 /**
  * 2017/10/18.
@@ -33,5 +34,7 @@ public interface UserService {
     );
 
     @GET("v1/users")
-    Flowable<UserListEntity> index();
+    Flowable<UserListEntity> index(
+            @Query("page") int page
+    );
 }
