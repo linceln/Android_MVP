@@ -16,9 +16,16 @@ import com.xyz.php.presenters.UserPresenter;
 import com.xyz.php.utils.SnackbarUtils;
 import com.xyz.php.views.adapters.UserAdapter;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class UserActivity extends BaseActivity implements IUserView {
 
-    private CoordinatorLayout coordinator;
+    @BindView(R.id.coordinator)
+    CoordinatorLayout coordinator;
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
+
     private UserAdapter adapter;
     private IUserPresenter presenter;
 
@@ -28,27 +35,13 @@ public class UserActivity extends BaseActivity implements IUserView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
+        ButterKnife.bind(this);
         presenter = new UserPresenter(this, page);
         initToolbar(presenter.getSignedInUsername());
-        coordinator = findViewById(R.id.coordinator);
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new UserAdapter(this, presenter.getUserList());
         recyclerView.setAdapter(adapter);
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                if (!recyclerView.canScrollVertically(1)) {
-                    onPaging();
-                }
-            }
-        });
     }
 
     @Override

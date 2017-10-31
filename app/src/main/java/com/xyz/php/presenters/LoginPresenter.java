@@ -4,9 +4,9 @@ import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 
-import com.xyz.php.config.HttpSubscriber;
 import com.xyz.php.abs.presenters.ILoginPresenter;
 import com.xyz.php.abs.views.ILoginView;
+import com.xyz.php.config.HttpSubscriber;
 import com.xyz.php.constants.AppConst;
 import com.xyz.php.constants.RequestCode;
 import com.xyz.php.constants.SPConst;
