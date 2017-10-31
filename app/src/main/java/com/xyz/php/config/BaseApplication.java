@@ -2,9 +2,6 @@ package com.xyz.php.config;
 
 import com.xyz.core.base.AbstractApplication;
 
-import io.realm.Realm;
-import io.realm.RealmConfiguration;
-
 /**
  * 17/10/2017
  */
@@ -20,11 +17,5 @@ public class BaseApplication extends AbstractApplication {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        Realm.init(this);
-        RealmConfiguration configuration = new RealmConfiguration.Builder()
-                .name("realm.core")
-                .deleteRealmIfMigrationNeeded()
-                .build();
-        Realm.setDefaultConfiguration(configuration);
     }
 }

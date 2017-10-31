@@ -8,5 +8,6 @@ import java.util.List;
  * 2017/10/23.
  */
 public class UserListEntity extends BaseEntity {
-    public List<UserEntity> users;
+    public int pages;
+    public List<UserEntity> user;
 }

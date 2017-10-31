@@ -77,18 +77,13 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
     }
 
     @Override
-    public void validate(String msg) {
+    public void onValidate(String msg) {
         SnackbarUtils.simple(container, msg);
     }
 
     @Override
     public FragmentActivity getActivity() {
         return this;
-    }
-
-    @Override
-    public void onLastUserMobile(String mobile) {
-        etMobile.setText(mobile);
     }
 
     @Override
@@ -101,5 +96,13 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
     @Override
     public void onLoginFailed(String msg) {
         SnackbarUtils.simple(container, msg);
+    }
+
+    @Override
+    public void onShowHistoryMobile(String mobile) {
+        if (!TextUtils.isEmpty(mobile)) {
+            etMobile.setText(mobile);
+            etPassword.requestFocus();
+        }
     }
 }

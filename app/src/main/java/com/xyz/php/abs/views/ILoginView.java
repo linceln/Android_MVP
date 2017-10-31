@@ -12,13 +12,13 @@ public interface ILoginView {
 
     String getPassword();
 
-    void validate(String msg);
-
     FragmentActivity getActivity();
 
-    void onLastUserMobile(String mobile);
+    void onValidate(String msg);
 
     void onLoginSuccess(String msg);
 
     void onLoginFailed(String msg);
+
+    void onShowHistoryMobile(String mobile);
 }
