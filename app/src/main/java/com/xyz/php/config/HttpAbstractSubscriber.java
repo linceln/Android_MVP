@@ -1,10 +1,8 @@
-package com.xyz.core.http;
+package com.xyz.php.config;
 
 import android.util.Log;
 
-import com.xyz.core.BuildConfig;
-import com.xyz.core.base.BaseEntity;
-import com.xyz.core.util.LogUtil;
+import com.xyz.php.BuildConfig;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;

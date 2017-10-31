@@ -1,8 +1,8 @@
-package com.xyz.core.util;
+package com.xyz.php.utils;
 
 import android.util.Log;
 
-import com.xyz.core.BuildConfig;
+import com.xyz.php.BuildConfig;
 
 public final class LogUtil {
 

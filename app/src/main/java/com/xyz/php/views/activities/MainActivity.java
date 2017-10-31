@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.xyz.core.base.BaseEntity;
+import com.xyz.php.config.BaseEntity;
 import com.xyz.php.R;
 import com.xyz.php.abs.presenters.IPhpPresenter;
 import com.xyz.php.abs.views.IPhpView;

@@ -1,6 +1,6 @@
 package com.xyz.php.models;
 
-import com.xyz.core.base.BaseEntity;
+import com.xyz.php.config.BaseEntity;
 import com.xyz.php.config.HttpManager;
 import com.xyz.php.models.api.PhpService;
 import com.xyz.php.entities.BMIEntity;

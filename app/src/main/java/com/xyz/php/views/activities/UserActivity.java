@@ -29,12 +29,26 @@ public class UserActivity extends BaseActivity implements IUserView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
         presenter = new UserPresenter(this, page);
-        initToolbar("USERS");
+        initToolbar(presenter.getSignedInUsername());
         coordinator = findViewById(R.id.coordinator);
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new UserAdapter(this, presenter.getUserList());
         recyclerView.setAdapter(adapter);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (!recyclerView.canScrollVertically(1)) {
+                    onPaging();
+                }
+            }
+        });
     }
 
     @Override
@@ -54,7 +68,7 @@ public class UserActivity extends BaseActivity implements IUserView {
 
     @Override
     public void onItemClick() {
-        startActivity(new Intent(this, HomeActivity.class));
+        startActivity(new Intent(this, UserDetailActivity.class));
     }
 
     @Override

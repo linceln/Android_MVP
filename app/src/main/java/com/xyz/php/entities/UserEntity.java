@@ -1,6 +1,6 @@
 package com.xyz.php.entities;
 
-import com.xyz.core.base.BaseEntity;
+import com.xyz.php.config.BaseEntity;
 
 /**
  * 2017/10/18.

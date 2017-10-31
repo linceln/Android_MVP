@@ -1,6 +1,7 @@
 package com.xyz.php.abs.presenters;
 
 import com.xyz.php.entities.UserEntity;
+import com.xyz.php.models.db.User;
 
 import java.util.List;
 
@@ -11,6 +12,8 @@ import java.util.List;
 public interface IUserPresenter {
 
     List<UserEntity> getUserList();
+
+    String getSignedInUsername();
 
     void clear();
 

@@ -2,8 +2,8 @@ package com.xyz.php.presenters;
 
 import android.text.TextUtils;
 
-import com.xyz.core.base.BaseEntity;
-import com.xyz.core.http.HttpSubscriber;
+import com.xyz.php.config.BaseEntity;
+import com.xyz.php.config.HttpSubscriber;
 import com.xyz.php.abs.presenters.IPhpPresenter;
 import com.xyz.php.abs.views.IPhpView;
 import com.xyz.php.models.PhpRequest;

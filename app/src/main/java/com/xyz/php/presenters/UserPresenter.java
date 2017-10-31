@@ -1,12 +1,17 @@
 package com.xyz.php.presenters;
 
-import com.xyz.core.http.DoTransform;
-import com.xyz.core.http.HttpSubscriber;
 import com.xyz.php.abs.presenters.IUserPresenter;
 import com.xyz.php.abs.views.IUserView;
+import com.xyz.php.config.DoTransform;
+import com.xyz.php.config.HttpSubscriber;
+import com.xyz.php.constants.SPConst;
 import com.xyz.php.entities.UserEntity;
 import com.xyz.php.entities.UserListEntity;
 import com.xyz.php.models.UserRequest;
+import com.xyz.php.models.db.User;
+import com.xyz.php.utils.SPUtils;
+
+import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +32,12 @@ public class UserPresenter implements IUserPresenter {
     @Override
     public List<UserEntity> getUserList() {
         return users;
+    }
+
+    @Override
+    public String getSignedInUsername() {
+        User user = DataSupport.where("token == ?", SPUtils.getString(SPConst.TOKEN)).findFirst(User.class);
+        return user != null ? user.username : "";
     }
 
     @Override

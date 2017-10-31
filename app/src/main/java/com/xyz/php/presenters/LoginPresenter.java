@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 
-import com.xyz.core.http.HttpSubscriber;
+import com.xyz.php.config.HttpSubscriber;
 import com.xyz.php.abs.presenters.ILoginPresenter;
 import com.xyz.php.abs.views.ILoginView;
 import com.xyz.php.constants.AppConst;
@@ -18,8 +18,6 @@ import com.xyz.php.utils.SPUtils;
 import com.xyz.php.views.activities.RegisterActivity;
 
 import org.litepal.crud.DataSupport;
-
-import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;

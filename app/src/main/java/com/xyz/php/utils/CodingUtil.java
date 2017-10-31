@@ -1,4 +1,4 @@
-package com.xyz.core.util;
+package com.xyz.php.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -12,8 +12,7 @@ public class CodingUtil {
         Matcher m = Pattern.compile("\\\\u([0-9a-zA-Z]{4})").matcher(s);
         StringBuffer sb = new StringBuffer(s.length());
         while (m.find()) {
-            m.appendReplacement(sb,
-                    Character.toString((char) Integer.parseInt(m.group(1), 16)));
+            m.appendReplacement(sb, Character.toString((char) Integer.parseInt(m.group(1), 16)));
         }
         m.appendTail(sb);
         return sb.toString();

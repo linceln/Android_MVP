@@ -24,6 +24,7 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+
 #LitePal
 -keep class org.litepal.** {
     *;

@@ -1,9 +1,9 @@
-package com.xyz.core.http;
+package com.xyz.php.config;
 
 import android.support.annotation.NonNull;
 
-import com.xyz.core.util.CodingUtil;
-import com.xyz.core.util.LogUtil;
+import com.xyz.php.utils.CodingUtil;
+import com.xyz.php.utils.LogUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;

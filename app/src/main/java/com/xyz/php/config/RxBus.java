@@ -1,4 +1,4 @@
-package com.xyz.core.base;
+package com.xyz.php.config;
 
 import io.reactivex.Flowable;
 import io.reactivex.processors.FlowableProcessor;

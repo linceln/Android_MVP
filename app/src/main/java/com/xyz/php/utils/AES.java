@@ -2,8 +2,6 @@ package com.xyz.php.utils;
 
 import android.util.Base64;
 
-import com.xyz.core.util.LogUtil;
-
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;

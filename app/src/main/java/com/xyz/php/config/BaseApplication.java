@@ -1,7 +1,5 @@
 package com.xyz.php.config;
 
-import com.xyz.core.base.AbstractApplication;
-
 /**
  * 17/10/2017
  */

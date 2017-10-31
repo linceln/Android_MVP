@@ -1,4 +1,4 @@
-package com.xyz.core.base;
+package com.xyz.php.config;
 
 public class BaseEntity {
 

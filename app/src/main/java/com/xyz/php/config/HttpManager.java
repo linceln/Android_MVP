@@ -1,8 +1,7 @@
 package com.xyz.php.config;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
-import com.xyz.core.BuildConfig;
-import com.xyz.core.http.LogInterceptor;
+import com.xyz.php.BuildConfig;
 import com.xyz.php.constants.UrlConst;
 
 import java.util.concurrent.TimeUnit;

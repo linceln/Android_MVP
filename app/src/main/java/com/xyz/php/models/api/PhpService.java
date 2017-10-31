@@ -1,6 +1,6 @@
 package com.xyz.php.models.api;
 
-import com.xyz.core.base.BaseEntity;
+import com.xyz.php.config.BaseEntity;
 import com.xyz.php.entities.BMIEntity;
 
 import io.reactivex.Flowable;

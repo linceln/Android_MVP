@@ -1,8 +1,6 @@
-package com.xyz.core.http;
+package com.xyz.php.config;
 
 import android.support.v4.app.FragmentActivity;
-
-import com.xyz.core.base.BaseEntity;
 
 /**
  * 2017/10/17.

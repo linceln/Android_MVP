@@ -51,9 +51,6 @@ public class ParamInterceptor implements Interceptor {
     /**
      * GET URL
      * 如果某个参数key对应的value为空，则忽略此参数
-     *
-     * @param request
-     * @return
      */
     private String newUrl(Request request) {
 
@@ -78,9 +75,6 @@ public class ParamInterceptor implements Interceptor {
     /**
      * POST BODY
      * 如果某个参数key对应的value为空，则忽略此参数
-     *
-     * @param request
-     * @return
      */
     @NonNull
     private RequestBody newRequestBody(Request request) {

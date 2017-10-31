@@ -2,7 +2,7 @@ package com.xyz.php.presenters;
 
 import android.text.TextUtils;
 
-import com.xyz.core.http.HttpSubscriber;
+import com.xyz.php.config.HttpSubscriber;
 import com.xyz.php.abs.presenters.IRegisterPresenter;
 import com.xyz.php.abs.views.IRegisterView;
 import com.xyz.php.entities.UserEntity;
