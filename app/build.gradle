@@ -10,14 +10,41 @@ android {
         versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
-        debug{
-            minifyEnabled false
-        }
+    signingConfigs {
+        signing {
+            //加载资源
+            Properties properties = new Properties()
+            InputStream inputStream = project.rootProject.file('local.properties').newDataInputStream()
+            properties.load(inputStream)
 
+            //读取文件
+            def store_file = properties.getProperty('key.file')
+            def store_password = properties.getProperty('storePassword')
+
+            //读取字段
+            def key_alias = properties.getProperty('keyAlias')
+            def key_password = properties.getProperty('keyPassword')
+
+            storeFile file(store_file)
+            storePassword store_password
+            keyAlias key_alias
+            keyPassword key_password
+        }
+    }
+    buildTypes {
+        debug {
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.signing
+        }
         release {
             minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.signing
         }
     }
 }
