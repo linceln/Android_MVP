@@ -9,5 +9,5 @@ import java.util.List;
  */
 public class UserListEntity extends BaseEntity {
     public int pages;
-    public List<UserEntity> user;
+    public List<UserEntity> users;
 }

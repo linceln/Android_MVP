@@ -6,6 +6,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.WindowManager;
 
 import com.xyz.php.R;
 import com.xyz.php.abs.presenters.IUserPresenter;
@@ -14,6 +15,7 @@ import com.xyz.php.config.BaseActivity;
 import com.xyz.php.constants.AppConst;
 import com.xyz.php.presenters.UserPresenter;
 import com.xyz.php.utils.SnackbarUtils;
+import com.xyz.php.utils.StatusBarUtil;
 import com.xyz.php.views.adapters.UserAdapter;
 
 import butterknife.BindView;
@@ -35,6 +37,7 @@ public class UserActivity extends BaseActivity implements IUserView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
+        StatusBarUtil.setStatusBarTransparentAndLight(this);
         ButterKnife.bind(this);
         presenter = new UserPresenter(this, page);
         initToolbar(presenter.getSignedInUsername());

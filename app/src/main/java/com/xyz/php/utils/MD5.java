@@ -16,7 +16,7 @@ public class MD5 {
             MessageDigest md5 = MessageDigest.getInstance("MD5");
             byte[] digest = md5.digest(content.getBytes("utf-8"));
             BigInteger bigInteger = new BigInteger(1, digest);
-            return bigInteger.toString(16);// 转为 16 进制数字显示
+            return bigInteger.toString(16);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {

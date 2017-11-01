@@ -52,7 +52,7 @@ public class UserPresenter implements IUserPresenter {
                 .subscribe(new HttpSubscriber<UserListEntity>(userView.getActivity()) {
                     @Override
                     protected void onSuccess(UserListEntity userListEntity) {
-                        users.addAll(userListEntity.user);
+                        users.addAll(userListEntity.users);
                         userView.onRequestSuccess();
                     }
 
