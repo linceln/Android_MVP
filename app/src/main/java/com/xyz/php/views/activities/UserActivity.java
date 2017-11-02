@@ -1,12 +1,18 @@
 package com.xyz.php.views.activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -31,6 +37,8 @@ public class UserActivity extends BaseActivity implements IUserView, OnLoadmoreL
     RecyclerView recyclerView;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
+    @BindView(R.id.iv)
+    ImageView iv;
 
     private UserAdapter adapter;
     private IUserPresenter presenter;
@@ -45,6 +53,8 @@ public class UserActivity extends BaseActivity implements IUserView, OnLoadmoreL
         ButterKnife.bind(this);
         presenter = new UserPresenter(this, page);
         initToolbar(presenter.getSignedInUsername());
+
+        Glide.with(this).load(R.mipmap.ic_gif_tank).into(iv);
         refreshLayout.setOnLoadmoreListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new UserAdapter(this, presenter.getUserList());
@@ -76,18 +86,6 @@ public class UserActivity extends BaseActivity implements IUserView, OnLoadmoreL
     public void onItemClick() {
         startActivity(new Intent(this, UserDetailActivity.class));
     }
-
-//    @Override
-//    public void onRefresh() {
-//        page = AppConst.DEFAULT_PAGE;
-//        presenter.clear();
-//        presenter.getUser(page);
-//    }
-//
-//    @Override
-//    public void onPaging() {
-//
-//    }
 
     @Override
     public void onLoadmore(RefreshLayout refreshlayout) {

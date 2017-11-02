@@ -15,8 +15,4 @@ public interface IUserView {
     void onRequestFailed(String msg);
 
     void onItemClick();
-
-//    void onRefresh();
-//
-//    void onPaging();
 }
