@@ -24,6 +24,7 @@ import com.xyz.php.constants.RequestCode;
 import com.xyz.php.presenters.LoginPresenter;
 import com.xyz.php.utils.MD5;
 import com.xyz.php.utils.SnackbarUtils;
+import com.xyz.php.utils.StatusBarUtil;
 import com.xyz.php.utils.ToastUtils;
 
 import java.util.concurrent.TimeUnit;
@@ -53,6 +54,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        StatusBarUtil.setStatusBarTransparentAndDark(this);
         ButterKnife.bind(this);
         initToolbar("SIGN IN");
         presenter = new LoginPresenter(this);

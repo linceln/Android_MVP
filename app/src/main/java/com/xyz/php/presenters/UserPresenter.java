@@ -53,7 +53,7 @@ public class UserPresenter implements IUserPresenter {
                     @Override
                     protected void onSuccess(UserListEntity userListEntity) {
                         users.addAll(userListEntity.users);
-                        userView.onRequestSuccess();
+                        userView.onRequestSuccess(userListEntity.pages);
                     }
 
                     @Override

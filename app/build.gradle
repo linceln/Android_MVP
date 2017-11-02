@@ -76,4 +76,6 @@ dependencies {
 
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
 }

@@ -19,6 +19,7 @@ import com.xyz.php.entities.UserEntity;
 import com.xyz.php.presenters.RegisterPresenter;
 import com.xyz.php.utils.MD5;
 import com.xyz.php.utils.SnackbarUtils;
+import com.xyz.php.utils.StatusBarUtil;
 import com.xyz.php.utils.ToastUtils;
 
 import java.util.concurrent.TimeUnit;
