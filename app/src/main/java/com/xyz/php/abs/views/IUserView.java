@@ -6,11 +6,11 @@ import android.support.v4.app.FragmentActivity;
  * 2017/10/23.
  */
 
-public interface IUserView {
+public interface IUserView extends IPaginationView{
 
     FragmentActivity getActivity();
 
-    void onRequestSuccess(int pages);
+    void onRequestSuccess();
 
     void onRequestFailed(String msg);
 

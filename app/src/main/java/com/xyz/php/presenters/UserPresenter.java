@@ -46,14 +46,20 @@ public class UserPresenter implements IUserPresenter {
     }
 
     @Override
-    public void getUser(int page) {
+    public void getUser(final int page) {
         UserRequest.index(page)
                 .compose(DoTransform.<UserListEntity>applyScheduler(true))
                 .subscribe(new HttpSubscriber<UserListEntity>(userView.getActivity()) {
                     @Override
                     protected void onSuccess(UserListEntity userListEntity) {
                         users.addAll(userListEntity.users);
-                        userView.onRequestSuccess(userListEntity.pages);
+                        int pages = userListEntity.pages;
+                        if (page >= pages - 1) {
+                            userView.onFinishPagination(false);
+                        } else {
+                            userView.onFinishPagination(true);
+                        }
+                        userView.onRequestSuccess();
                     }
 
                     @Override

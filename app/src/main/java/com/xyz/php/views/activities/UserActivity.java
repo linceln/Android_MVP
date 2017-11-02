@@ -1,9 +1,7 @@
 package com.xyz.php.views.activities;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,13 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.BitmapImageViewTarget;
-import com.bumptech.glide.request.transition.Transition;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.xyz.php.R;
 import com.xyz.php.abs.presenters.IUserPresenter;
+import com.xyz.php.abs.views.IPaginationView;
 import com.xyz.php.abs.views.IUserView;
 import com.xyz.php.config.BaseActivity;
 import com.xyz.php.constants.AppConst;
@@ -67,14 +64,8 @@ public class UserActivity extends BaseActivity implements IUserView, OnLoadmoreL
     }
 
     @Override
-    public void onRequestSuccess(int pages) {
-        refreshLayout.finishLoadmore();
+    public void onRequestSuccess() {
         adapter.notifyDataSetChanged();
-        if (page >= pages - 1) {
-            refreshLayout.setEnableLoadmore(false);
-        } else {
-            refreshLayout.setEnableLoadmore(true);
-        }
     }
 
     @Override
@@ -85,6 +76,12 @@ public class UserActivity extends BaseActivity implements IUserView, OnLoadmoreL
     @Override
     public void onItemClick() {
         startActivity(new Intent(this, UserDetailActivity.class));
+    }
+
+    @Override
+    public void onFinishPagination(boolean isFinishPaginate) {
+        refreshLayout.finishLoadmore();
+        refreshLayout.setEnableLoadmore(isFinishPaginate);
     }
 
     @Override
