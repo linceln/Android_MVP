@@ -5,37 +5,35 @@ import android.text.TextUtils;
 import com.xyz.php.abs.presenters.IRegisterPresenter;
 import com.xyz.php.abs.views.IRegisterView;
 import com.xyz.php.config.DoTransform;
-import com.xyz.php.config.HttpSubscriber;
 import com.xyz.php.entities.UserEntity;
-import com.xyz.php.models.UserRequest;
+
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Flowable;
+import io.reactivex.functions.Consumer;
 
 /**
  * 18/10/2017
  */
-public class RegisterPresenter implements IRegisterPresenter {
+public class RegisterPresenterTest implements IRegisterPresenter {
 
     private IRegisterView registerView;
 
-    public RegisterPresenter(IRegisterView registerView) {
-
+    public RegisterPresenterTest(IRegisterView registerView) {
         this.registerView = registerView;
     }
 
     @Override
     public void register(String username, String mobile, String password, String repeatPassword) {
-        UserRequest.register(username, mobile, password, repeatPassword)
-                .compose(DoTransform.<UserEntity>applyScheduler(true))
-                .compose(registerView.getActivity().<UserEntity>bindToLifecycle())
-                .subscribe(new HttpSubscriber<UserEntity>(registerView.getActivity()) {
-
+        Flowable.timer(3, TimeUnit.SECONDS)
+                .compose(DoTransform.<Long>applyScheduler(true))
+                .subscribe(new Consumer<Long>() {
                     @Override
-                    protected void onSuccess(UserEntity userEntity) {
+                    public void accept(Long aLong) throws Exception {
+                        UserEntity userEntity = new UserEntity();
+                        userEntity.msg = "Test Success";
+                        userEntity.mobile = "15859286737";
                         registerView.onRegisterSuccess(userEntity);
-                    }
-
-                    @Override
-                    protected void onFail(String msg) {
-                        registerView.onRegisterFailed(msg);
                     }
                 });
     }

@@ -9,19 +9,13 @@ import com.xyz.php.entities.UserEntity;
 
 public interface IRegisterView {
 
-    String getUsername();
-
-    String getMobile();
-
-    String getPassword();
-
-    String getRepeatPassword();
-
     RxAppCompatActivity getActivity();
+
+    void onValidateSuccess(String username, String mobile, String password, String repeatPassword);
+
+    void onValidateFailed(String msg);
 
     void onRegisterSuccess(UserEntity userEntity);
 
     void onRegisterFailed(String msg);
-
-    void onInvalidate(String msg);
 }

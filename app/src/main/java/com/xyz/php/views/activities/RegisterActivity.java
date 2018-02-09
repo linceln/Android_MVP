@@ -17,72 +17,84 @@ import com.xyz.php.constants.AppConst;
 import com.xyz.php.constants.Extras;
 import com.xyz.php.entities.UserEntity;
 import com.xyz.php.presenters.RegisterPresenter;
+import com.xyz.php.presenters.RegisterPresenterTest;
 import com.xyz.php.utils.MD5;
 import com.xyz.php.utils.SnackbarUtils;
-import com.xyz.php.utils.StatusBarUtil;
 import com.xyz.php.utils.ToastUtils;
 
 import java.util.concurrent.TimeUnit;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import io.reactivex.functions.Consumer;
 
 public class RegisterActivity extends BaseActivity implements IRegisterView {
 
     private IRegisterPresenter presenter;
-    private FloatingActionButton fab;
-    private TextInputEditText etUsername;
-    private TextInputEditText etMobile;
-    private TextInputEditText etPassword;
-    private TextInputEditText etRepeatPassword;
+
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
+
+    @BindView(R.id.etUsername)
+    TextInputEditText etUsername;
+
+    @BindView(R.id.etMobile)
+    TextInputEditText etMobile;
+
+    @BindView(R.id.etPassword)
+    TextInputEditText etPassword;
+
+    @BindView(R.id.etRepeatPassword)
+    TextInputEditText etRepeatPassword;
+
+    @BindView(R.id.tilRepeatPassword)
+    TextInputLayout tilRepeatPassword;
+
+    @BindView(R.id.tilPassword)
+    TextInputLayout tilPassword;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         initToolbar("SIGN UP");
-        etUsername = findViewById(R.id.etUsername);
-        etMobile = findViewById(R.id.etMobile);
-        TextInputLayout tilPassword = findViewById(R.id.tilPassword);
+        ButterKnife.bind(this);
+
+        presenter = new RegisterPresenter(this);
+//        presenter = new RegisterPresenterTest(this);
+
         tilPassword.setPasswordVisibilityToggleEnabled(true);
-        etPassword = findViewById(R.id.etPassword);
-        TextInputLayout tilRepeatPassword = findViewById(R.id.tilRepeatPassword);
         tilRepeatPassword.setPasswordVisibilityToggleEnabled(true);
-        etRepeatPassword = findViewById(R.id.etRepeatPassword);
-        fab = findViewById(R.id.fab);
+
         RxView.clicks(fab)
                 .throttleFirst(AppConst.THROTTLE_TIME, TimeUnit.MILLISECONDS)
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(Object o) throws Exception {
-                        presenter.register();
+                        String username = etUsername.getText().toString().trim();
+                        String mobile = etMobile.getText().toString().trim();
+                        String password = MD5.digest(etPassword.getText().toString().trim());
+                        String repeatPassword = MD5.digest(etRepeatPassword.getText().toString().trim());
+
+                        presenter.validate(username, mobile, password, repeatPassword);
                     }
                 });
-        presenter = new RegisterPresenter(this);
-    }
-
-    @Override
-    public String getUsername() {
-        return etUsername.getText().toString().trim();
-    }
-
-    @Override
-    public String getMobile() {
-        return etMobile.getText().toString().trim();
-    }
-
-    @Override
-    public String getPassword() {
-        return MD5.digest(etPassword.getText().toString().trim());
-    }
-
-    @Override
-    public String getRepeatPassword() {
-        return MD5.digest(etRepeatPassword.getText().toString().trim());
     }
 
     @Override
     public RxAppCompatActivity getActivity() {
         return this;
+    }
+
+    @Override
+    public void onValidateSuccess(String username, String mobile, String password, String repeatPassword) {
+        presenter.register(username, mobile, password, repeatPassword);
+    }
+
+    @Override
+    public void onValidateFailed(String msg) {
+        SnackbarUtils.simple(fab, msg);
     }
 
     @Override
@@ -96,11 +108,6 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
 
     @Override
     public void onRegisterFailed(String msg) {
-        SnackbarUtils.simple(fab, msg);
-    }
-
-    @Override
-    public void onInvalidate(String msg) {
         SnackbarUtils.simple(fab, msg);
     }
 }
