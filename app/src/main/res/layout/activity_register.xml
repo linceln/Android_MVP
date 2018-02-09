@@ -5,7 +5,7 @@
     android:id="@+id/coordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:userActivity="com.xyz.php.views.activities.RegisterActivity">
+    tools:activity="com.xyz.php.views.activities.RegisterActivity">
 
     <include layout="@layout/navigator" />
 

@@ -5,7 +5,7 @@
     android:id="@+id/coordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:userActivity="com.xyz.php.views.activities.UserActivity">
+    tools:activity="com.xyz.php.views.activities.UserActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

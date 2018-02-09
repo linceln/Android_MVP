@@ -41,11 +41,11 @@ public abstract class AbstractApplication extends Application {
             @Override
             public RefreshFooter createRefreshFooter(Context context, RefreshLayout layout) {
                 //指定为经典Footer，默认是 BallPulseFooter
-//                return new ClassicsFooter(context).setDrawableSize(20);
-                return new BallPulseFooter(context)
-                        .setIndicatorColor(0xfff5a343)
-                        .setNormalColor(0xfff5a343)
-                        .setAnimatingColor(0xfff5a343);
+                return new ClassicsFooter(context).setDrawableSize(20);
+//                return new BallPulseFooter(context)
+//                        .setIndicatorColor(0xfff5a343)
+//                        .setNormalColor(0xfff5a343)
+//                        .setAnimatingColor(0xfff5a343);
             }
         });
     }

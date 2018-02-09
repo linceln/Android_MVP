@@ -1,17 +1,19 @@
 package com.xyz.php.config;
 
 import com.xyz.php.BuildConfig;
+import com.xyz.php.utils.LogUtil;
+import com.xyz.php.utils.ToastUtils;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
-import java.net.ConnectException;
+import java.io.IOException;
 import java.net.SocketTimeoutException;
 
 /**
  * 2017/2/7.
  */
-abstract class HttpAbstractSubscriber<T extends BaseEntity> implements Subscriber<T> {
+public abstract class HttpAbstractSubscriber<T extends BaseEntity> implements Subscriber<T> {
 
     @Override
     public void onSubscribe(Subscription s) {
@@ -20,27 +22,25 @@ abstract class HttpAbstractSubscriber<T extends BaseEntity> implements Subscribe
 
     @Override
     public void onNext(T t) {
-        if (t.statusCode == 200) {
-            switch (t.code) {
-                case 0:
-                    onFail(t.msg);
-                    break;
-                case 1:
-                    onSuccess(t);
-                    break;
-            }
+        switch (t.code) {
+            case 0:
+                onFail(t.msg);
+                break;
+            case 1:
+                onSuccess(t);
+                break;
         }
     }
 
     @Override
     public void onError(Throwable e) {
-        if (e instanceof SocketTimeoutException || e instanceof ConnectException) {
-            onFail("网络不给力，请检查网络设置");
+        if (e instanceof SocketTimeoutException || e instanceof IOException) {
+            onNetworkError("网络不给力，请检查网络设置");
         } else {
             if (BuildConfig.DEBUG) {
-                onFail(e.getMessage());
+                onNetworkError(e.getMessage());
             } else {
-                onFail("网络请求出现异常，请稍后重试");
+                onNetworkError("网络请求出现异常，请稍后重试");
             }
         }
     }
@@ -52,4 +52,8 @@ abstract class HttpAbstractSubscriber<T extends BaseEntity> implements Subscribe
     protected abstract void onSuccess(T t);
 
     protected abstract void onFail(String msg);
+
+    protected void onNetworkError(String msg) {
+        ToastUtils.simple(msg);
+    }
 }

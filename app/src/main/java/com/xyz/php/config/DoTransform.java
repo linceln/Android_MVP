@@ -22,8 +22,8 @@ public class DoTransform {
         return new FlowableTransformer<T, T>() {
             @Override
             public Publisher<T> apply(Flowable<T> upstream) {
-                return upstream.subscribeOn(AndroidSchedulers.mainThread())
-                        .observeOn(Schedulers.io());
+                return upstream.subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread());
             }
         };
     }

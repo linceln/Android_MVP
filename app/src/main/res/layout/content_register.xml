@@ -11,7 +11,7 @@
     android:padding="16dp"
     android:showDividers="middle"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:userActivity="com.xyz.php.views.activities.RegisterActivity"
+    tools:activity="com.xyz.php.views.activities.RegisterActivity"
     tools:showIn="@layout/activity_register">
 
     <ImageView
