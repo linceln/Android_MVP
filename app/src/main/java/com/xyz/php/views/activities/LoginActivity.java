@@ -20,7 +20,7 @@ import com.xyz.php.constants.AppConst;
 import com.xyz.php.constants.Extras;
 import com.xyz.php.constants.RequestCode;
 import com.xyz.php.presenters.LoginPresenter;
-import com.xyz.php.utils.MD5;
+import com.xyz.php.presenters.LoginPresenterTest;
 import com.xyz.php.utils.SnackbarUtils;
 import com.xyz.php.utils.StatusBarUtil;
 import com.xyz.php.utils.ToastUtils;
@@ -57,28 +57,45 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        initToolbar("SIGN IN");
         StatusBarUtil.setStatusBarTransparentAndDark(this);
         ButterKnife.bind(this);
-        initToolbar("SIGN IN");
+
         presenter = new LoginPresenter(this);
+//        presenter = new LoginPresenterTest(this);
 
         tilPassword.setPasswordVisibilityToggleEnabled(true);
+
+        setHistoryMobile();
+
         RxView.clicks(btnSignIn)
                 .throttleFirst(AppConst.THROTTLE_TIME, TimeUnit.MILLISECONDS)
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(Object o) throws Exception {
-                        presenter.signIn();
+                        String mobile = etMobile.getText().toString().trim();
+                        String password = etPassword.getText().toString().trim();
+
+                        presenter.validate(mobile, password);
                     }
                 });
+
         RxView.clicks(tvRegister)
                 .throttleFirst(AppConst.THROTTLE_TIME, TimeUnit.MILLISECONDS)
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(Object o) throws Exception {
-                        presenter.startRegisterActivity();
+                        startActivityForResult(new Intent(LoginActivity.this, RegisterActivity.class), RequestCode.REGISTER);
                     }
                 });
+    }
+
+    private void setHistoryMobile() {
+        String lastMobile = presenter != null ? presenter.getLastMobile() : "";
+        if (!TextUtils.isEmpty(lastMobile)) {
+            etMobile.setText(lastMobile);
+            etPassword.requestFocus();
+        }
     }
 
     @Override
@@ -94,23 +111,18 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     }
 
     @Override
-    public String getMobile() {
-        return etMobile.getText().toString().trim();
-    }
-
-    @Override
-    public String getPassword() {
-        return MD5.digest(etPassword.getText().toString().trim());
-    }
-
-    @Override
-    public void onValidate(String msg) {
-        SnackbarUtils.simple(container, msg);
-    }
-
-    @Override
     public FragmentActivity getActivity() {
         return this;
+    }
+
+    @Override
+    public void onValidateSuccess(String mobile, String password) {
+        presenter.signIn(mobile, password);
+    }
+
+    @Override
+    public void onValidateFailed(String msg) {
+        SnackbarUtils.simple(container, msg);
     }
 
     @Override
@@ -123,13 +135,5 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     @Override
     public void onLoginFailed(String msg) {
         SnackbarUtils.simple(container, msg);
-    }
-
-    @Override
-    public void onShowHistoryMobile(String mobile) {
-        if (!TextUtils.isEmpty(mobile)) {
-            etMobile.setText(mobile);
-            etPassword.requestFocus();
-        }
     }
 }

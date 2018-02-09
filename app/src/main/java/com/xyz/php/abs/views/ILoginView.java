@@ -8,17 +8,13 @@ import android.support.v4.app.FragmentActivity;
 
 public interface ILoginView {
 
-    String getMobile();
-
-    String getPassword();
-
     FragmentActivity getActivity();
 
-    void onValidate(String msg);
-
-    void onLoginSuccess(String msg);
+    void onValidateSuccess(String mobile, String password);
 
     void onLoginFailed(String msg);
 
-    void onShowHistoryMobile(String mobile);
+    void onValidateFailed(String msg);
+
+    void onLoginSuccess(String msg);
 }

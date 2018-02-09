@@ -11,7 +11,6 @@ import com.xyz.php.R;
 /**
  * 2017/6/30.
  */
-
 public class StatusBarUtil {
 
     /**

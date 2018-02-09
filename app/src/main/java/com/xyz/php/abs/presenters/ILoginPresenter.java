@@ -5,7 +5,27 @@ package com.xyz.php.abs.presenters;
  */
 public interface ILoginPresenter {
 
-    void signIn();
+    /**
+     * 获取上次登录的用户的手机号
+     *
+     * @return 手机号
+     */
+    String getLastMobile();
 
-    void startRegisterActivity();
+    /**
+     * 登录
+     *
+     * @param mobile   手机号
+     * @param password 密码
+     */
+    void signIn(String mobile, String password);
+
+    /**
+     * 验证输入数据
+     *
+     * @param mobile   手机号
+     * @param password 密码
+     */
+    void validate(String mobile, String password);
+
 }

@@ -2,9 +2,8 @@ package com.xyz.php.config;
 
 import android.support.v4.app.FragmentActivity;
 
-import com.xyz.php.utils.LogUtil;
-
 import org.reactivestreams.Publisher;
+import org.reactivestreams.Subscription;
 
 import io.reactivex.Flowable;
 import io.reactivex.FlowableTransformer;
@@ -31,21 +30,20 @@ public class DoTransform {
 
     private static <T> FlowableTransformer<T, T> applySchedulerWithState(final FragmentActivity activity) {
 
-        final LoadingFragment[] loadingFragment = new LoadingFragment[1];
+        final LoadingFragment[] loadingFragments = new LoadingFragment[1];
 
         return new FlowableTransformer<T, T>() {
             @Override
             public Publisher<T> apply(Flowable<T> upstream) {
                 return upstream.subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .doOnNext(new Consumer<T>() {
+                        .doOnSubscribe(new Consumer<Subscription>() {
                             @Override
-                            public void accept(T t) throws Exception {
+                            public void accept(Subscription subscription) throws Exception {
                                 // Start loading
-                                LogUtil.e("Start loading");
-                                loadingFragment[0] = new LoadingFragment();
+                                loadingFragments[0] = new LoadingFragment();
                                 activity.getSupportFragmentManager().beginTransaction()
-                                        .add(loadingFragment[0], "")
+                                        .add(loadingFragments[0], "")
                                         .commitAllowingStateLoss();
                             }
                         })
@@ -53,24 +51,22 @@ public class DoTransform {
                             @Override
                             public void accept(Throwable throwable) throws Exception {
                                 // End loading, show error
-                                LogUtil.e("End loading, show error");
                                 activity.getSupportFragmentManager()
                                         .beginTransaction()
-                                        .remove(loadingFragment[0])
+                                        .remove(loadingFragments[0])
                                         .commitAllowingStateLoss();
-                                loadingFragment[0] = null;
+                                loadingFragments[0] = null;
                             }
                         })
                         .doOnComplete(new Action() {
                             @Override
                             public void run() throws Exception {
                                 // End loading, show content
-                                LogUtil.e("End loading, show content");
                                 activity.getSupportFragmentManager()
                                         .beginTransaction()
-                                        .remove(loadingFragment[0])
+                                        .remove(loadingFragments[0])
                                         .commitAllowingStateLoss();
-                                loadingFragment[0] = null;
+                                loadingFragments[0] = null;
                             }
                         });
             }

@@ -18,6 +18,7 @@ import javax.crypto.spec.SecretKeySpec;
  * 2017/10/30.
  */
 public class AES {
+
     /**
      * AES加密字符串
      *

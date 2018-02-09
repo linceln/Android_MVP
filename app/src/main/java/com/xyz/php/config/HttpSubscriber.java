@@ -12,9 +12,4 @@ public abstract class HttpSubscriber<T extends BaseEntity> extends HttpAbstractS
     public HttpSubscriber(FragmentActivity activity) {
         this.activity = activity;
     }
-
-    @Override
-    protected void on1001() {
-
-    }
 }
