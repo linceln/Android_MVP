@@ -17,7 +17,7 @@ import retrofit2.http.Query;
 public interface UserService {
 
     @FormUrlEncoded
-    @POST("v1/users/login")
+    @POST("v1/user/login")
     Flowable<UserEntity> login(
             @Field("mobile") String username,
             @Field("password") String password,
@@ -25,7 +25,7 @@ public interface UserService {
     );
 
     @FormUrlEncoded
-    @POST("v1/users/signup")
+    @POST("v1/user/signup")
     Flowable<UserEntity> register(
             @Field("username") String username,
             @Field("mobile") String mobile,
@@ -33,7 +33,7 @@ public interface UserService {
             @Field("passwordRepeat") String passwordRepeat
     );
 
-    @GET("v1/users")
+    @GET("v1/user")
     Flowable<UserListEntity> index(
             @Query("page") int page
     );

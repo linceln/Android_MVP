@@ -3,12 +3,10 @@ package com.xyz.php.views.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -37,14 +35,19 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
     @BindView(R.id.container)
     LinearLayout container;
+
     @BindView(R.id.etMobile)
     TextInputEditText etMobile;
+
     @BindView(R.id.etPassword)
     TextInputEditText etPassword;
+
     @BindView(R.id.tilPassword)
     TextInputLayout tilPassword;
+
     @BindView(R.id.btnSignIn)
     Button btnSignIn;
+
     @BindView(R.id.tvRegister)
     TextView tvRegister;
 

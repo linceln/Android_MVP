@@ -24,7 +24,7 @@ public class RegisterPresenter implements IRegisterPresenter {
     @Override
     public void register(String username, String mobile, String password, String repeatPassword) {
         UserRequest.register(username, mobile, password, repeatPassword)
-                .compose(DoTransform.<UserEntity>applyScheduler(true))
+                .compose(DoTransform.<UserEntity>applyScheduler(registerView.getActivity(), true))
                 .compose(registerView.getActivity().<UserEntity>bindToLifecycle())
                 .subscribe(new HttpSubscriber<UserEntity>(registerView.getActivity()) {
 

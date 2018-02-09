@@ -61,8 +61,8 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
         initToolbar("SIGN UP");
         ButterKnife.bind(this);
 
-        presenter = new RegisterPresenter(this);
-//        presenter = new RegisterPresenterTest(this);
+//        presenter = new RegisterPresenter(this);
+        presenter = new RegisterPresenterTest(this);
 
         tilPassword.setPasswordVisibilityToggleEnabled(true);
         tilRepeatPassword.setPasswordVisibilityToggleEnabled(true);

@@ -48,7 +48,7 @@ public class UserPresenter implements IUserPresenter {
     @Override
     public void getUser(final int page) {
         UserRequest.index(page)
-                .compose(DoTransform.<UserListEntity>applyScheduler(true))
+                .compose(DoTransform.<UserListEntity>applyScheduler(userView.getActivity(), true))
                 .subscribe(new HttpSubscriber<UserListEntity>(userView.getActivity()) {
                     @Override
                     protected void onSuccess(UserListEntity userListEntity) {
