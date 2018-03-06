@@ -11,8 +11,6 @@ public interface IRegisterView {
 
     RxAppCompatActivity getActivity();
 
-    void onValidateSuccess(String username, String mobile, String password, String repeatPassword);
-
     void onValidateFailed(String msg);
 
     void onRegisterSuccess(UserEntity userEntity);

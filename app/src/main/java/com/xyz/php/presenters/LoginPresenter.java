@@ -7,12 +7,11 @@ import com.xyz.php.abs.views.ILoginView;
 import com.xyz.php.config.DoTransform;
 import com.xyz.php.config.HttpSubscriber;
 import com.xyz.php.constants.AppConst;
-import com.xyz.php.constants.SPConst;
 import com.xyz.php.entities.UserEntity;
 import com.xyz.php.models.UserRequest;
 import com.xyz.php.models.db.User;
 import com.xyz.php.utils.AES;
-import com.xyz.php.utils.SPUtils;
+import com.xyz.php.utils.TokenUtils;
 
 import org.litepal.crud.DataSupport;
 
@@ -40,8 +39,11 @@ public class LoginPresenter implements ILoginPresenter {
                 .subscribe(new HttpSubscriber<UserEntity>(view.getActivity()) {
                     @Override
                     protected void onSuccess(UserEntity userEntity) {
+                        // 保存 TOKEN 到 SharePreference， AES 对称加密
+                        TokenUtils.saveToken(userEntity.token);
+                        // 保存 User 到数据库
                         saveUserToDB(userEntity);
-                        view.onLoginSuccess(userEntity.msg);
+                        view.onLoginSuccess(userEntity.message);
                     }
 
                     @Override
@@ -61,17 +63,10 @@ public class LoginPresenter implements ILoginPresenter {
 
         if (TextUtils.isEmpty(password)) {
             view.onValidateFailed("Password cannot be empty");
-            return;
         }
-
-        view.onValidateSuccess(mobile, password);
     }
 
     private void saveUserToDB(final UserEntity userEntity) {
-
-        // 保存 TOKEN 到 SharePreference， AES 对称加密
-        SPUtils.putString(SPConst.TOKEN, AES.encrypt(userEntity.token, AppConst.SALT));
-
         // 保存登录用户到数据库
         User user = DataSupport.where("mobile == ?", userEntity.mobile).findFirst(User.class);
         if (user == null) {

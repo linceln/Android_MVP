@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements IPhpView, View.On
     @Override
     public void onSubmitSuccess(BMIEntity entity) {
 //        tvBMI.setText(entity.bmi);
-        Toast.makeText(this, entity.msg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, entity.message, Toast.LENGTH_SHORT).show();
     }
 
     @Override

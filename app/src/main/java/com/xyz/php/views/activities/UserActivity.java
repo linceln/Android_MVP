@@ -47,19 +47,20 @@ public class UserActivity extends BaseActivity implements IUserView, OnLoadmoreL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-        StatusBarUtil.setStatusBarTransparentAndLight(this);
         ButterKnife.bind(this);
 
         presenter = new UserPresenter(this);
 
-        presenter.request(page, false, false);
-
-        initToolbar(presenter.getTitle());
-
+        initTitle("用户列表");
+        StatusBarUtil.setStatusBarTransparentAndLight(this);
+        initRecyclerView();
         Glide.with(this).load(R.mipmap.ic_gif_tank).into(iv);
 
-        smartRefreshLayout.setOnLoadmoreListener(this);
+        presenter.request(page, false, false);
+    }
 
+    private void initRecyclerView() {
+        smartRefreshLayout.setOnLoadmoreListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = presenter.getAdapter();
         recyclerView.setAdapter(adapter);

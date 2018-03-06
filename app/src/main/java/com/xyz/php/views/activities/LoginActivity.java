@@ -20,7 +20,6 @@ import com.xyz.php.constants.AppConst;
 import com.xyz.php.constants.Extras;
 import com.xyz.php.constants.RequestCode;
 import com.xyz.php.presenters.LoginPresenter;
-import com.xyz.php.presenters.LoginPresenterTest;
 import com.xyz.php.utils.SnackbarUtils;
 import com.xyz.php.utils.StatusBarUtil;
 import com.xyz.php.utils.ToastUtils;
@@ -57,17 +56,36 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        initToolbar("SIGN IN");
-        StatusBarUtil.setStatusBarTransparentAndDark(this);
         ButterKnife.bind(this);
 
         presenter = new LoginPresenter(this);
 //        presenter = new LoginPresenterTest(this);
 
+        initTitle("SIGN IN");
+
+        StatusBarUtil.setStatusBarTransparentAndDark(this);
+
         tilPassword.setPasswordVisibilityToggleEnabled(true);
 
-        setHistoryMobile();
+        click2Login();
 
+        click2Register();
+
+        setHistoryMobile();
+    }
+
+    private void click2Register() {
+        RxView.clicks(tvRegister)
+                .throttleFirst(AppConst.THROTTLE_TIME, TimeUnit.MILLISECONDS)
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(Object o) throws Exception {
+                        startActivityForResult(new Intent(LoginActivity.this, RegisterActivity.class), RequestCode.REGISTER);
+                    }
+                });
+    }
+
+    private void click2Login() {
         RxView.clicks(btnSignIn)
                 .throttleFirst(AppConst.THROTTLE_TIME, TimeUnit.MILLISECONDS)
                 .subscribe(new Consumer<Object>() {
@@ -76,16 +94,10 @@ public class LoginActivity extends BaseActivity implements ILoginView {
                         String mobile = etMobile.getText().toString().trim();
                         String password = etPassword.getText().toString().trim();
 
+                        // validate
                         presenter.validate(mobile, password);
-                    }
-                });
-
-        RxView.clicks(tvRegister)
-                .throttleFirst(AppConst.THROTTLE_TIME, TimeUnit.MILLISECONDS)
-                .subscribe(new Consumer<Object>() {
-                    @Override
-                    public void accept(Object o) throws Exception {
-                        startActivityForResult(new Intent(LoginActivity.this, RegisterActivity.class), RequestCode.REGISTER);
+                        // Submit to login
+                        presenter.signIn(mobile, password);
                     }
                 });
     }
@@ -113,11 +125,6 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     @Override
     public FragmentActivity getActivity() {
         return this;
-    }
-
-    @Override
-    public void onValidateSuccess(String mobile, String password) {
-        presenter.signIn(mobile, password);
     }
 
     @Override

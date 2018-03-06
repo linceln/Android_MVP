@@ -43,7 +43,7 @@ public class RegisterPresenterTest implements IRegisterPresenter {
                     public void accept(Long aLong) throws Exception {
                         loadingFragment.dismiss();
                         UserEntity userEntity = new UserEntity();
-                        userEntity.msg = "Test Success";
+                        userEntity.message = "Test Success";
                         userEntity.mobile = "15859286737";
                         view.onRegisterSuccess(userEntity);
                     }
@@ -68,6 +68,5 @@ public class RegisterPresenterTest implements IRegisterPresenter {
             view.onValidateFailed("Password cannot be empty");
             return;
         }
-        view.onValidateSuccess(username, mobile, password, repeatPassword);
     }
 }

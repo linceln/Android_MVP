@@ -1,5 +1,6 @@
 package com.xyz.php.models;
 
+import com.xyz.php.config.BaseEntity;
 import com.xyz.php.config.HttpManager;
 import com.xyz.php.constants.AppConst;
 import com.xyz.php.entities.UserEntity;
@@ -15,12 +16,16 @@ public class UserRequest {
 
     private static UserService service = HttpManager.getRetrofit().create(UserService.class);
 
+    public static Flowable<BaseEntity> test(){
+        return service.test();
+    }
+
     public static Flowable<UserEntity> login(String account, String password) {
         return service.login(account, password, AppConst.DEVICE_ID);
     }
 
-    public static Flowable<UserEntity> register(String username, String mobile, String password, String passwordRepeat) {
-        return service.register(username, mobile, password, passwordRepeat);
+    public static Flowable<UserEntity> register(String username, String email, String password, String passwordRepeat) {
+        return service.register(username, email, password, passwordRepeat);
     }
 
     public static Flowable<UserListEntity> index(int page) {

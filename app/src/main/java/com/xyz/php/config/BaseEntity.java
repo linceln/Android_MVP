@@ -5,15 +5,15 @@ public class BaseEntity {
     /**
      * 网络请求状态：0：失败；1：成功
      */
-    public int code;
+    public int code = 1;
 
     /**
      * 提示信息
      */
-    public String msg;
+    public String message = "请求数据成功";
 
     /**
-     * 总页数
+     * 错误信息
      */
-    public int pages;
+    public String error = "请求数据失败";
 }

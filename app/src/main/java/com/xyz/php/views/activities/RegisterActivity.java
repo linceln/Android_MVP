@@ -17,7 +17,6 @@ import com.xyz.php.constants.AppConst;
 import com.xyz.php.constants.Extras;
 import com.xyz.php.entities.UserEntity;
 import com.xyz.php.presenters.RegisterPresenter;
-import com.xyz.php.presenters.RegisterPresenterTest;
 import com.xyz.php.utils.MD5;
 import com.xyz.php.utils.SnackbarUtils;
 import com.xyz.php.utils.ToastUtils;
@@ -58,15 +57,19 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        initToolbar("SIGN UP");
+        initTitle("SIGN UP");
         ButterKnife.bind(this);
 
-//        presenter = new RegisterPresenter(this);
-        presenter = new RegisterPresenterTest(this);
+        presenter = new RegisterPresenter(this);
+//        presenter = new RegisterPresenterTest(this);
 
         tilPassword.setPasswordVisibilityToggleEnabled(true);
         tilRepeatPassword.setPasswordVisibilityToggleEnabled(true);
 
+        click2Register();
+    }
+
+    private void click2Register() {
         RxView.clicks(fab)
                 .throttleFirst(AppConst.THROTTLE_TIME, TimeUnit.MILLISECONDS)
                 .subscribe(new Consumer<Object>() {
@@ -77,7 +80,10 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
                         String password = MD5.digest(etPassword.getText().toString().trim());
                         String repeatPassword = MD5.digest(etRepeatPassword.getText().toString().trim());
 
+                        // Validate
                         presenter.validate(username, mobile, password, repeatPassword);
+                        // Submit to register
+                        presenter.register(username, mobile, password, repeatPassword);
                     }
                 });
     }
@@ -88,18 +94,13 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
     }
 
     @Override
-    public void onValidateSuccess(String username, String mobile, String password, String repeatPassword) {
-        presenter.register(username, mobile, password, repeatPassword);
-    }
-
-    @Override
     public void onValidateFailed(String msg) {
         SnackbarUtils.simple(fab, msg);
     }
 
     @Override
     public void onRegisterSuccess(UserEntity userEntity) {
-        ToastUtils.simple(userEntity.msg);
+        ToastUtils.simple(userEntity.message);
         Intent intent = new Intent();
         intent.putExtra(Extras.MOBILE, userEntity.mobile);
         setResult(Activity.RESULT_OK, intent);

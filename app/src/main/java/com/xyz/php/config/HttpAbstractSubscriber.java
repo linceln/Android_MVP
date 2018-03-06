@@ -1,7 +1,5 @@
 package com.xyz.php.config;
 
-import com.xyz.php.BuildConfig;
-import com.xyz.php.utils.LogUtil;
 import com.xyz.php.utils.ToastUtils;
 
 import org.reactivestreams.Subscriber;
@@ -24,9 +22,9 @@ public abstract class HttpAbstractSubscriber<T extends BaseEntity> implements Su
     public void onNext(T t) {
         switch (t.code) {
             case 0:
-                onFail(t.msg);
+                onFail(t.message);
                 break;
-            case 1:
+            default:
                 onSuccess(t);
                 break;
         }
@@ -36,12 +34,6 @@ public abstract class HttpAbstractSubscriber<T extends BaseEntity> implements Su
     public void onError(Throwable e) {
         if (e instanceof SocketTimeoutException || e instanceof IOException) {
             onNetworkError("网络不给力，请检查网络设置");
-        } else {
-            if (BuildConfig.DEBUG) {
-                onNetworkError(e.getMessage());
-            } else {
-                onNetworkError("网络请求出现异常，请稍后重试");
-            }
         }
     }
 

@@ -1,5 +1,6 @@
 package com.xyz.php.models.api;
 
+import com.xyz.php.config.BaseEntity;
 import com.xyz.php.entities.UserEntity;
 import com.xyz.php.entities.UserListEntity;
 
@@ -16,21 +17,24 @@ import retrofit2.http.Query;
 
 public interface UserService {
 
+    @GET("v1/test")
+    Flowable<BaseEntity> test();
+
     @FormUrlEncoded
-    @POST("v1/user/login")
+    @POST("v1/login")
     Flowable<UserEntity> login(
-            @Field("mobile") String username,
+            @Field("email") String email,
             @Field("password") String password,
             @Field("device") int device
     );
 
     @FormUrlEncoded
-    @POST("v1/user/signup")
+    @POST("v1/register")
     Flowable<UserEntity> register(
-            @Field("username") String username,
-            @Field("mobile") String mobile,
+            @Field("name") String username,
+            @Field("email") String email,
             @Field("password") String password,
-            @Field("passwordRepeat") String passwordRepeat
+            @Field("password_confirmation") String password_confirmation
     );
 
     @GET("v1/user")

@@ -66,7 +66,5 @@ public class LoginPresenterTest implements ILoginPresenter {
             view.onValidateFailed("Password cannot be empty");
             return;
         }
-
-        view.onValidateSuccess(mobile, password);
     }
 }

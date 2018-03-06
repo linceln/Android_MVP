@@ -10,8 +10,6 @@ public interface ILoginView {
 
     FragmentActivity getActivity();
 
-    void onValidateSuccess(String mobile, String password);
-
     void onLoginFailed(String msg);
 
     void onValidateFailed(String msg);

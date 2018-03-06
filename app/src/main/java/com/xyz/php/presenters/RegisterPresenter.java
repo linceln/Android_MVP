@@ -56,8 +56,6 @@ public class RegisterPresenter implements IRegisterPresenter {
         }
         if (TextUtils.isEmpty(repeatPassword)) {
             registerView.onValidateFailed("Password cannot be empty");
-            return;
         }
-        registerView.onValidateSuccess(username, mobile, password, repeatPassword);
     }
 }

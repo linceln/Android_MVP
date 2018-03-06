@@ -3,10 +3,7 @@ package com.xyz.php.config;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import com.xyz.php.constants.AppConst;
-import com.xyz.php.constants.SPConst;
-import com.xyz.php.utils.AES;
-import com.xyz.php.utils.SPUtils;
+import com.xyz.php.utils.TokenUtils;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -32,20 +29,27 @@ public class ParamInterceptor implements Interceptor {
         Request newRequest;
         switch (request.method()) {
             case "GET":
-                newRequest = request.newBuilder().url(newUrl(request)).addHeader("Authorization", getToken()).build();
+                newRequest = request.newBuilder()
+                        .url(newUrl(request))
+                        .addHeader("Authorization", TokenUtils.getToken())
+                        .addHeader("Accept", "Application/json")
+                        .addHeader("Content-Type", "Application/json")
+                        .build();
                 break;
             case "POST":
-                newRequest = request.newBuilder().url(newUrl(request)).post(newRequestBody(request)).addHeader("Authorization", getToken()).build();
+                newRequest = request.newBuilder()
+                        .url(newUrl(request))
+                        .post(newRequestBody(request))
+                        .addHeader("Authorization", TokenUtils.getToken())
+                        .addHeader("Accept", "Application/json")
+                        .addHeader("Content-Type", "Application/json")
+                        .build();
                 break;
             default:
                 newRequest = request.newBuilder().build();
                 break;
         }
         return newRequest;
-    }
-
-    private String getToken() {
-        return "Bearer " + AES.decrypt(SPUtils.getString(SPConst.TOKEN), AppConst.SALT);
     }
 
     /**

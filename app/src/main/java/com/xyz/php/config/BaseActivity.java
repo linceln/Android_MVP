@@ -8,8 +8,6 @@ import android.view.MenuItem;
 
 import com.xyz.php.R;
 
-import butterknife.ButterKnife;
-
 /**
  * 2017/10/18.
  */
@@ -24,7 +22,7 @@ public abstract class BaseActivity extends AbstractActivity {
     protected void receive() {
     }
 
-    protected void initToolbar(String title) {
+    protected void initTitle(String title) {
         Toolbar toolbar = findViewById(R.id.toolbar);
         if (toolbar != null) {
             toolbar.setTitle(title);
